@@ -190,13 +190,16 @@ class DB_DataContainer {
         unset($var['key']);
 
         foreach ($var as $key => $value) {
-            $query .= "$key='$value', ";
+            if ($value) {
+                $query .= "$key='$value', ";
+            }
         }
+
         $query = substr($query, 0, -2); 
 
         $query .= $append;
 
-//        print "<FONT COLOR=#FF0000>$query</FONT><BR>";
+        print "<FONT COLOR=#FF0000>$query</FONT><BR>";
 
         $result = $this->dbh->query($query);
 
