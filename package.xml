@@ -24,14 +24,13 @@ methods supported with recent PHP.
 
   <release>
     <license>BSD</license>
-    <version>1.1.0</version>
-    <date>2004-05-10</date>
+    <version>1.2.0RC1</version>
+    <date>2004-05-11</date>
     <state>stable</state>
     <notes>
-* load() now returns an PEAR_Error if SELECT returned no data or if SELECT
-  returned more than exactly one row.
-* load() converts all column names to lowercase before setting the  
-  object properties
+* $table now defaults to classname
+* sibling is now overloaded by default if working overload extension available
+* constructor in sibling is now optional
     </notes>
     <filelist>
       <dir name="/" baseinstalldir="DB">
@@ -60,6 +59,16 @@ methods supported with recent PHP.
   </deps>
 
   <changelog>
+
+    <release>
+      <version>1.1.0</version>
+      <notes>
+* load() now returns an PEAR_Error if SELECT returned no data or if SELECT
+  returned more than exactly one row.
+* load() converts all column names to lowercase before setting the  
+  object properties
+      </notes>
+    </release>
 
     <release>
       <version>1.0.2</version>
