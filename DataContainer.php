@@ -440,71 +440,34 @@ class DB_DataContainer {
     }
 
   /**
-    * Generate accessor methods 
-    *
-    * Calling DB_DataContainer::generateMethods('Name') after the
-    * class definition of the class extending DB_DataContainer
-    * generates the setXxx() and getXxx() methods for all properties
-    * which do not have such methods hardcoded in. 
+    * Method overloading 
     *
     * NOTE! This will not work properly with PHP versions earlier
     * than 4.3.2-RC2 because of bugs in overload extension. 
     *
-    * @param	string  $child name of the class calling 
-    * @access   static
-    * @return   mixed   number of generated methods on success 
-    *                   PEAR_Error on failure
     */  
 
-    function generateMethods($child) {
-
-        /* overload extension was buggy before 4.3.2-RC2 */
-        if (version_compare(PHP_VERSION, '4.3.2-RC', '>=')) {
-           
-            overload($child);
-
-            $var      = get_class_vars($child);
-            $method   = get_class_methods($child);
-            $retval   = 0;
-            $child    = strtolower($child);
-
-            foreach ($var as $key => $val) {
-  
-                $function = 'get' . $key;
-                if (!(array_search($function, $method))) {
-                    /* use $child in front to avoid namespace clashes */
-                    $str  = "function $child$function(\$object) {";
-                    $str .= "return(\$object->$key);";
-                    $str .= "}";
-                    $retval++;
-                    eval($str);
-                }
-
-                $function = 'set' . $key;
-                if (!(array_search($function, $method))) {
-                    /* use $child in front to avoid namespace clashes */
-                    $str  = "function $child$function(&\$object, \$input='') {";
-                    $str .= "\$object->$key = \$input;";
-                    $str .= "}";
-                    $retval++;
-                    eval($str);
-                }
-            }
-
-        } else {
-            $retval = PEAR::raiseError('PHP 4.3.2-RC or later needed.');
-        }
-
-        return($retval);
-
-    }
-
     function __call($method,$params,&$return) {
-        $self     = get_class($this);
-        $self     = strtolower($self);
-        $function = $self . $method; 
-        $return   = $function($this, $params[0]);
-        return(true);
+
+          $var     = get_object_vars($this);
+          $retval = false;
+          
+          if (strpos($method, 'get') === 0) {
+              $property =  substr($method, 3);
+              if (array_key_exists($property, $var)) {
+                  $return = $this->$property;
+                  $retval = true;
+              }
+          } elseif (strpos($method, 'set') === 0) {
+              $property =  substr($method, 3);
+              if (array_key_exists($property, $var)) {
+                  $this->$property = $params[0];
+                  $return = null;
+                  $retval = true;
+              }
+          }
+           
+        return($retval);  
     }
 
 }
