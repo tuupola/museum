@@ -28,6 +28,8 @@ methods supported with recent PHP.
     <date>2003-10-08</date>
     <state>stable</state>
     <notes>
+* If given numeric non-array $params parameter to the constructor
+  it is considered to be the $id 
 * Unified regression tests
     </notes>
     <filelist>
