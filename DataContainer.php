@@ -121,9 +121,14 @@ class DB_DataContainer {
 
     function DB_DataContainer($dbh, $params) {
 
+        /* default is to use setXxx() methods */
         $strict = isset($params['strict']) ? $params['strict'] : true;
-        print get_class($this);
         $this->setStrict($strict);
+
+        /* tablename default to classname */
+        $table = isset($params['table']) ? $params['table'] : get_class($this);
+        $this->setTable($table);
+
         if (is_array($params)) {
             $this->setProperties($params);
         } else if (is_numeric($params)){
