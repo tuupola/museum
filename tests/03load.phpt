@@ -21,11 +21,15 @@ require_once('./Person.php');
 $params['id'] = 4;
 $p = new Person($dbh, $params);
 $p->createDB();
-$p->load();
+$status = $p->load();
 
-print $p->firstname . "\n";
-print $p->lastname . "\n";
-print $p->mobile . "\n";
+if (PEAR::isError($status)) {
+    print $status->getMessage();
+} else {
+    print $p->firstname . "\n";
+    print $p->lastname . "\n";
+    print $p->mobile . "\n";
+}
 
 ?>
 --GET--
