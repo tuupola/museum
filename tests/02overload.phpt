@@ -17,7 +17,6 @@ print $status;
 <?php 
 require_once('./skipif.php');
 require_once('./Person.php');
-overload('Person');
 $dbh = '';
 $params = array();
 $p = new Person($dbh, $params);
