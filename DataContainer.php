@@ -114,7 +114,7 @@ class DB_DataContainer {
 
     function DB_DataContainer($dbh, $params) {
 
-        $strict    = $params['strict'] ? $params['strict'] : true;
+        $strict = $params['strict'] ? $params['strict'] : true;
         $this->setStrict($strict);
         $this->setProperties($params);
         $this->setDBH($dbh);
@@ -148,7 +148,7 @@ class DB_DataContainer {
                 }
             }
         } else {
-            $result = PEAR::raiseError('Object does not have a key.');
+            $result = PEAR::raiseError('Container does not have a key.');
         }
         return($result);
     }
@@ -362,7 +362,22 @@ class DB_DataContainer {
                 } 
                 /* TODO: consider using DB::limitQuery() */
                 if (isset($params['limit'])) {
-                    $query .= "LIMIT $params[limit] ";
+                    if (is_array($params['limit'])) {
+                        $from  = $params['limit'][0];
+                        $count = $params['limit'][1];
+                    } else {
+                        /* split by whitespace and/or comma */
+                        $temp = preg_split ('/[\s,]+/', $params['limit'], 2 );
+                        if (count($temp) == 2) {
+                          $from  = $temp[0];
+                          $count = $temp[1];
+                        } else {
+                          $from  = 0;
+                          $count = $temp[0];
+                        }
+                    }
+//                    $query .= "LIMIT $params[limit] ";
+                    $query = $dbh->modifyLimitQuery($query, $from, $count);
                 }
             }
 
