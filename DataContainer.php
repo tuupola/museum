@@ -173,7 +173,6 @@ class DB_DataContainer {
     * given and object does not have an $id will set the $id when
     * executing the INSERT.
     *
-    * @todo     consider using DB:autoExecute()
     * @param	integer $id (optional)
     * @return   mixed true on success PEAR error on failure
     */  
@@ -249,6 +248,8 @@ class DB_DataContainer {
     */
 
     function setProperties($params) {
+
+        /* TODO: PEAR errorhandling if $params != array */
         if (is_array($params)) {
 
             /* use accessor methods */
@@ -396,7 +397,7 @@ class DB_DataContainer {
                 } elseif (isset($params['order'])) {
                     $query .= "ORDER BY $params[order] ";
                 } 
-                /* TODO: test with other drivers than MySQL too */
+                /* TODO: test with other drivers than Postgres and MySQL  */
                 if (isset($params['limit'])) {
                     if (is_array($params['limit'])) {
                         $from  = $params['limit'][0];
