@@ -24,20 +24,57 @@ supported with recent PHP.
 
   <release>
     <license>BSD</license>
-    <version>0.11.0</version>
+    <version>0.12.0</version>
     <date>2003-05-02</date>
     <state>beta</state>
     <notes>
-* Overloaded accessor methods are now handled more intelligently.
+* Regression tests for postgres, mysql and mssql added
+* E_ALL fixes
     </notes>
     <filelist>
       <dir name="/" baseinstalldir="DB">
          <file role="php" name="DataContainer.php" />
       </dir>
+      <dir name="tests" role="test">
+         <file role="test" name="run-tests.patch" />
+         <file role="test" name="Person.php" />
+         <file role="test" name="setproperties.phpt" />
+         <file role="test" name="overload.phpt" />
+         <file role="test" name="mysql.php" />
+         <file role="test" name="mysql_limit.phpt" />
+         <file role="test" name="mysql_load.phpt" />
+         <file role="test" name="mysql_order.phpt" />
+         <file role="test" name="mysql_save.phpt" />
+         <file role="test" name="mysql_where.phpt" />
+         <file role="test" name="postgres.php" />
+         <file role="test" name="postgres_load.phpt" />
+         <file role="test" name="postgres_order.phpt" />
+         <file role="test" name="postgres_save.phpt" />
+         <file role="test" name="postgres_where.phpt" />
+         <file role="test" name="mssql.php" />
+         <file role="test" name="mssql_limit.phpt" />
+         <file role="test" name="mssql_load.phpt" />
+         <file role="test" name="mssql_order.phpt" />
+         <file role="test" name="mssql_save.phpt" />
+         <file role="test" name="mssql_where.phpt" />
+      </dir>
+      <dir name="pear" role="test">
+         <file role="test" name="README" />
+      </dir>
+      <dir name="ext" role="test">
+         <file role="test" name="README" />
+      </dir>
     </filelist>
   </release>
 
   <changelog>
+    <release>
+      <version>0.11.0</version>
+      <notes>
+* Overloaded accessor methods are now handled more intelligently.
+      </notes>
+    </release>
+
     <release>
       <version>0.10.0</version>
       <notes>
