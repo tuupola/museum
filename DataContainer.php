@@ -442,7 +442,7 @@ class DB_DataContainer {
     function generateMethods($child) {
 
         /* overload extension was buggy before 4.3.2-RC1 */
-        if (version_compare(PHP_VERSION, '4.3.2-RC', '<=')) {
+        if (version_compare(PHP_VERSION, '4.3.2-RC', '>=')) {
 
             $var      = get_class_vars($child);
             $method   = get_class_methods($child);
@@ -463,7 +463,6 @@ class DB_DataContainer {
                 if (!(array_search($function, $method))) {
                     $str  = "function $function(&\$object, \$input='') {";
                     $str .= "\$object->$key = \$input;";
-                    $str .= "print_r(\$object);";
                     $str .= "}";
                     $retval++;
                     eval($str);
