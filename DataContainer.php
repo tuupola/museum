@@ -3,27 +3,19 @@
 /* vim: set ts=4 sw=4: */
 
 // +----------------------------------------------------------------------+
-// |                                                                      |
-// | DB_Datacontainer.php A class for handling SQL stored data.           |
-// | Copyright (C) 2002 Mika Tuupola                                      |
-// |                                                                      |
-// | This library is free software; you can redistribute it and/or        |
-// | modify it under the terms of the GNU Lesser General Public           |
-// | License as published by the Free Software Foundation; either         |
-// | version 2.1 of the License, or (at your option) any later version.   |
-// |                                                                      |
-// | This library is distributed in the hope that it will be useful,      |
-// | but WITHOUT ANY WARRANTY; without even the implied warranty of       |
-// | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU    |
-// | Lesser General Public License for more details.                      |
-// |                                                                      |
-// | You should have received a copy of the GNU Lesser General Public     |
-// | License along with this library; if not, write to the Free Software  |
-// | Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 |
-// | USA                                                                  |
-// |                                                                      |
-// | Contact: tuupola@appelsiini.net                                      |
-// |                                                                      |
+// | PHP Version 4                                                        |
+// +----------------------------------------------------------------------+
+// | Copyright (c) 1997-2002 The PHP Group                                |
+// +----------------------------------------------------------------------+
+// | This source file is subject to version 2.0 of the PHP license,       |
+// | that is bundled with this package in the file LICENSE, and is        |
+// | available at through the world-wide-web at                           |
+// | http://www.php.net/license/2_02.txt.                                 |
+// | If you did not receive a copy of the PHP license and are unable to   |
+// | obtain it through the world-wide-web, please send a note to          |
+// | license@php.net so we can mail you a copy immediately.               |
+// +----------------------------------------------------------------------+
+// | Author: Mika Tuupola <tuupola@appelsiini.net>                        |
 // +----------------------------------------------------------------------+
 
 /* $Id$ */
@@ -291,31 +283,36 @@ class DB_DataContainer {
 
     function getObjects($dbh, $params='') {
 
-        $retval = '';
+        $retval = array();
 
-        if (!(isset($params['autoload']))) {
-            $params['autoload'] = false;
-        }
- 
-        if (!(trim($params['table']))) {
-            $retval = PEAR::raiseError('Need $params[table]');
-        } elseif (!(trim($params['classname']))) {  
+        if (!(trim($params['classname']))) {
             $retval = PEAR::raiseError('Need $params[classname]');
+        } elseif (!(trim($params['table']))) {  
+              /* defaults to $params[classname] */
+              $params['table'] = $params[classname];
         }
 
         if (!(PEAR::isError($retval))) {
+        
+            /* if we have an hardcoded query no need to generate one */
+            if (isset($params['query'])) {
 
-            $query = "SELECT * FROM $params[table] ";
-            if (isset($params['where'])) {
-                $query .= "WHERE $params[where] ";
-            }
-            if (isset($params['orderby'])) {
-                $query .= "ORDER BY $params[orderby] ";
-            } elseif (isset($params['order'])) {
-                $query .= "ORDER BY $params[order] ";
-            }
-            if (isset($params['limit'])) {
-                $query .= "LIMIT $params[limit] ";
+                $query = $params['query'];
+
+            } else {
+
+                $query = "SELECT * FROM $params[table] ";
+                if (isset($params['where'])) {
+                    $query .= "WHERE $params[where] ";
+                }
+                if (isset($params['orderby'])) {
+                    $query .= "ORDER BY $params[orderby] ";
+                } elseif (isset($params['order'])) {
+                    $query .= "ORDER BY $params[order] ";
+                }
+                if (isset($params['limit'])) {
+                    $query .= "LIMIT $params[limit] ";
+                }
             }
 
             $result = $dbh->query($query);
@@ -328,15 +325,6 @@ class DB_DataContainer {
                 while ($row = $result->fetchRow(DB_FETCHMODE_ASSOC)) {
                     $row['table'] = $params['table'];
                     $c = new $params['classname']($dbh, $row);
-
-//                    if ($params['autoload']) {
-//                        $status = $c->load();
-//                        if (PEAR::isError($status)) {
-//                            $retval = $status;
-//                            break;
-//                        }
-//                    }
-
                     array_push($retval, $c);
                     unset($c);
                 }
