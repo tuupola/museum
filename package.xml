@@ -47,7 +47,7 @@ methods supported with recent PHP.
          <file role="test" name="05limit.phpt" />
          <file role="test" name="06order.phpt" />
          <file role="test" name="07where.phpt" />
-         <file role="test" name="08where.phpt" />
+         <file role="test" name="08delete.phpt" />
          <file role="test" name="09hardcoded.phpt" />
       </dir>
     </filelist>
