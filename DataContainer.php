@@ -439,7 +439,9 @@ class DB_DataContainer {
                 /* uses more memory but causes only one SELECT    */
                 while ($row = $result->fetchRow(DB_FETCHMODE_ASSOC)) {
                     $row['table']  = $params['table'];
-                    $row['strict'] = $params['strict'];
+                    if (isset($params['strict'])) {
+                        $row['strict'] = $params['strict'];
+                    }
                     $c = new $params['classname']($dbh, $row);
                     array_push($retval, $c);
                     unset($c);
