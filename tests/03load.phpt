@@ -1,5 +1,5 @@
 --TEST--
-DataContainer::load()
+DB_DataContainer::load()
 --SKIPIF--
 <?php 
 /* first one for cvs */
