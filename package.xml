@@ -24,13 +24,11 @@ methods supported with recent PHP.
 
   <release>
     <license>BSD</license>
-    <version>1.0.1</version>
-    <date>2003-10-08</date>
+    <version>1.0.2</version>
+    <date>2003-10-14</date>
     <state>stable</state>
     <notes>
-* If given numeric non-array $params parameter to the constructor
-  it is considered to be the $id 
-* Unified regression tests
+
     </notes>
     <filelist>
       <dir name="/" baseinstalldir="DB">
@@ -47,14 +45,26 @@ methods supported with recent PHP.
          <file role="test" name="05limit.phpt" />
          <file role="test" name="06order.phpt" />
          <file role="test" name="07where.phpt" />
+         <file role="test" name="08where.phpt" />
+         <file role="test" name="09hardcoded.phpt" />
       </dir>
     </filelist>
   </release>
   <deps>
+    <dep type="pkg" rel="has">DB</dep>
     <dep type="php" rel="ge">4.2.0</dep>
   </deps>
 
   <changelog>
+
+    <release>
+      <version>1.0.1</version>
+      <notes>
+* If given numeric non-array $params parameter to the constructor
+  it is considered to be the $id 
+* Unified regression tests
+      </notes>
+    </release>
 
     <release>
       <version>1.0.0</version>
