@@ -4,9 +4,9 @@
 
 // +----------------------------------------------------------------------+
 // |                                                                      |
-// | DB_DataContainer.php A class for encapsulating RDBMS stored data     |
-// | into an object and automatically generating SQL queries for saving   |
-// | and deleting data.                                                   |
+// | DB_DataContainer.php A class which encapsulates data stored in SQL   |
+// | database and provides common methods for saving and retrieving data  | 
+// | with automatic query generation.                                     |
 // |                                                                      |
 // | Copyright (C) 2002,2003 Mika Tuupola                                 |
 // |                                                                      |
