@@ -19,7 +19,6 @@ class DataContainer {
     * Id of the data if exists the database. 
     *
     * Will have value only if the dataobject was read from the database.
-    * If it was created from form data value will be null.
     *
     * @access	private
     */
@@ -44,11 +43,15 @@ class DataContainer {
     * data queried from database. Otherwise will try to create
     * the object from given array of.
     *
-    * If $params[table] is given it will override the default table
-    * defined in DATAOBJECT_DEFAULT_TABLE.
+    * If $params[key] is given that column will be used instead
+    * of column 'id'. 
+    *
+    * $params[$params[key]] _must_ be given together with $params[key]
+    *
+    * $params[table] is mandatory
     *
     * Rest of the data given in $params will be mapped against
-    * objects properties.
+    * object properties.
     *
     * @param	object  $dbh a PEAR database handler object.
     * @param	array   $params 
@@ -65,8 +68,8 @@ class DataContainer {
 
         $key = $params[key] ? $params[key] : 'id';
 
-        /* if we have an id load up data from the database    */
-        /* and discard any possible data given in ($params);  */
+        /* if we have an id or key load up data from the database  */
+        /* and discard any possible data given in $params          */
         if ($this->id || $params[key]) {
             $query  = "SELECT * FROM $this->table
                        WHERE ($key='{$this->$key}') ";
