@@ -23,7 +23,6 @@ $p->createDB();
 unset($p);
 unset($params);
 
-$params['strict']    = false;
 $params['classname'] = 'person';
 $params['limit']     = '3';
 $person = Person::getObjects($dbh, $params);

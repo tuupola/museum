@@ -23,7 +23,6 @@ $p->createDB();
 unset($p);
 unset($params);
 
-$params['strict']    = false;
 $params['classname'] = 'person';
 $params['order']     = "lastname,firstname";
 $person = Person::getObjects($dbh, $params);

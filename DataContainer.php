@@ -452,7 +452,19 @@ class DB_DataContainer {
 
             } else {
 
-                $query = "SELECT * FROM $params[table] ";
+                /* do not do a SELECT * but SELECT x,y,z ... instead */
+                $var    = get_class_vars($params['classname']);
+
+                /* This wont work prior to PHP 4.2.0 */
+                $ignore = get_class_vars('DB_DataContainer');
+                foreach($ignore as $key => $val) {
+                    unset($var[$key]);
+                }  
+
+                $select  = implode(',', array_keys($var));            
+                $select .= ',id';
+
+                $query = "SELECT $select FROM $params[table] ";
                 if (isset($params['where'])) {
                     $query .= "WHERE $params[where] ";
                 }
