@@ -29,6 +29,11 @@ if (PEAR::isError($status)) {
     print $p->firstname . "\n";
     print $p->lastname . "\n";
     print $p->mobile . "\n";
+    if (isset($p->nosuch)) {
+      print $p->nosuch . "\n";
+    }
+
+    print_r($status);
 }
 
 ?>
@@ -38,4 +43,4 @@ if (PEAR::isError($status)) {
 Jenni
 Laine
 +358-9-123456
-
+1

@@ -28,7 +28,8 @@ class Person extends DB_DataContainer {
                  id INTEGER PRIMARY KEY NOT NULL,
                  firstname VARCHAR(32),
                  lastname VARCHAR(32),
-                 mobile VARCHAR(16)
+                 mobile VARCHAR(16),
+                 nosuch VARCHAR(16)
              )"
         );
 
@@ -66,7 +67,12 @@ class Person extends DB_DataContainer {
         $p->setProperties($params);
         $p->save();
 
+        $this->dbh->query(
+            "UPDATE $this->table SET nosuch='should not load'"
+        );
+
     }
 }
 
 ?>
+
