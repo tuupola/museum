@@ -450,7 +450,7 @@ class DB_DataContainer {
     * NOTE! This will not work properly with PHP versions earlier
     * than 4.3.2-RC1 because of bugs in overload extension. 
     *
-    * @param	array   $child name of the class calling 
+    * @param	string  $child name of the class calling 
     * @access   static
     * @return   mixed   number of generated methods on success 
     *                   PEAR_Error on failure
