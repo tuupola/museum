@@ -71,15 +71,17 @@ class DataContainer {
             $query  = "SELECT * FROM $this->table
                        WHERE ($key='{$this->$key}') ";
 
-            print "<FONT COLOR=#FF0000>$query</FONT><BR>";  
+            // print "<FONT COLOR=#FF0000>$query</FONT><BR>";  
 
             $result = $this->dbh->query($query);
             if (DB::isError($result)) {
                 print $result->getDebugInfo(); 
             } else {
                 $row = $result->fetchRow(DB_FETCHMODE_ASSOC);
-                foreach ($row as $key=>$val) {
-                    $this->$key = $val;
+                if (is_array($row)) {
+                    foreach ($row as $key=>$val) {
+                        $this->$key = $val;
+                    }
                 }
             }
         }
@@ -136,6 +138,7 @@ class DataContainer {
         unset($var[id]);
         unset($var[dbh]);
         unset($var[table]);
+        unset($var[key]);
 
         foreach ($var as $key => $value) {
             $query .= "$key='$value', ";
