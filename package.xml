@@ -24,12 +24,13 @@ supported with recent PHP.
 
   <release>
     <license>BSD</license>
-    <version>0.12.0</version>
-    <date>2003-05-02</date>
-    <state>beta</state>
+    <version>1.0.0</version>
+    <date>2003-06-23</date>
+    <state>stable</state>
     <notes>
-* Regression tests for postgres, mysql and mssql added
-* E_ALL fixes
+* Stable release
+* Fixes mssql LIMIT problems
+* Fixes mssql regression tests
     </notes>
     <filelist>
       <dir name="/" baseinstalldir="DB">
@@ -71,6 +72,15 @@ supported with recent PHP.
   </deps>
 
   <changelog>
+
+    <release>
+      <version>0.12.0</version>
+      <notes>
+* Regression tests for postgres, mysql and mssql added
+* E_ALL fixes
+      </notes>
+    </release>
+
     <release>
       <version>0.11.0</version>
       <notes>
