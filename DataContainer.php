@@ -162,6 +162,8 @@ class DB_DataContainer {
                 $row = $result->fetchRow(DB_FETCHMODE_ASSOC);
                 if (is_array($row)) {
                     foreach ($row as $key=>$val) {
+                        /* TODO: ugly hack to fix mixed case trouble */
+                        $key = strtolower($key);
                         $this->$key = $val;
                     }
                 }
