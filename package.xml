@@ -24,13 +24,14 @@ methods supported with recent PHP.
 
   <release>
     <license>BSD</license>
-    <version>1.0.2</version>
-    <date>2003-10-14</date>
+    <version>1.1.0</version>
+    <date>2004-04-28</date>
     <state>stable</state>
     <notes>
-* Hardcoded queries were silently ignored (bug noticed by 
-  Pierfrancesco Marsiaj)
-* Added regressions tests for hardcoded queries and delete() method
+* load() now returns an PEAR_Error if SELECT returned no data or if SELECT
+  returned more than exactly one row.
+* load() converts all column names to lowercase before setting the  
+  object properties
     </notes>
     <filelist>
       <dir name="/" baseinstalldir="DB">
@@ -49,6 +50,7 @@ methods supported with recent PHP.
          <file role="test" name="07where.phpt" />
          <file role="test" name="08delete.phpt" />
          <file role="test" name="09hardcoded.phpt" />
+         <file role="test" name="10errormessages.phpt" />
       </dir>
     </filelist>
   </release>
@@ -58,6 +60,15 @@ methods supported with recent PHP.
   </deps>
 
   <changelog>
+
+    <release>
+      <version>1.0.2</version>
+      <notes>
+* Hardcoded queries were silently ignored (bug noticed by 
+  Pierfrancesco Marsiaj)
+* Added regressions tests for hardcoded queries and delete() method
+      </notes>
+    </release>
 
     <release>
       <version>1.0.1</version>
