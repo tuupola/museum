@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!DOCTYPE package SYSTEM "../package.dtd">
 
-<package>
+<package version="1.0">
   <name>DB_DataContainer</name>
   <summary>Data persistence and encapsulation</summary>
   <description>
@@ -24,8 +24,8 @@ methods supported with recent PHP.
 
   <release>
     <license>BSD</license>
-    <version>1.2.0RC3</version>
-    <date>2004-05-27</date>
+    <version>1.2.0</version>
+    <date>2004-09-02</date>
     <state>stable</state>
     <notes>
 * load() and getObjects() now ignore extra columns in database which do 
@@ -33,6 +33,8 @@ methods supported with recent PHP.
 * $table now defaults to classname
 * sibling is now overloaded by default if working overload extension available
 * constructor in sibling is now optional
+* BUGFIX: load() returned an array insted of true on successfull load
+* slightly improved regression tests
     </notes>
     <filelist>
       <dir name="/" baseinstalldir="DB">
