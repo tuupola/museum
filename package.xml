@@ -24,12 +24,12 @@ methods supported with recent PHP.
 
   <release>
     <license>BSD</license>
-    <version>1.2.0RC2</version>
+    <version>1.2.0RC3</version>
     <date>2004-05-27</date>
     <state>stable</state>
     <notes>
-* load() now ignores extra columns in database which do not have a matching
-  property name pair
+* load() and getObjects() now ignore extra columns in database which do 
+  not have a matching property name pairs
 * $table now defaults to classname
 * sibling is now overloaded by default if working overload extension available
 * constructor in sibling is now optional
