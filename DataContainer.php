@@ -448,7 +448,7 @@ class DB_DataContainer {
     * which do not have such methods hardcoded in. 
     *
     * NOTE! This will not work properly with PHP versions earlier
-    * than 4.3.2-RC1 because of bugs in overload extension. 
+    * than 4.3.2-RC2 because of bugs in overload extension. 
     *
     * @param	string  $child name of the class calling 
     * @access   static
@@ -458,7 +458,7 @@ class DB_DataContainer {
 
     function generateMethods($child) {
 
-        /* overload extension was buggy before 4.3.2-RC1 */
+        /* overload extension was buggy before 4.3.2-RC2 */
         if (version_compare(PHP_VERSION, '4.3.2-RC', '>=')) {
            
             overload($child);
