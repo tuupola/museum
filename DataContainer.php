@@ -118,7 +118,7 @@ class DB_DataContainer {
 
     function DB_DataContainer($dbh, $params) {
 
-        $strict = $params['strict'] ? $params['strict'] : true;
+        $strict = isset($params['strict']) ? $params['strict'] : true;
         $this->setStrict($strict);
         $this->setProperties($params);
         $this->setDBH($dbh);
