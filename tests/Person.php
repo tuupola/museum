@@ -15,6 +15,7 @@ class Person extends DB_DataContainer {
     var $mobile;
 
     function Person($dbh, $params) {
+        overload('Person');
         $params['table'] = isset($params['table'])
                            ? $params['table'] : 'person';
         $this->DB_DataContainer($dbh, $params);    
