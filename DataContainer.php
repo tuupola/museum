@@ -90,6 +90,9 @@ class DB_DataContainer {
   /**
     * The class constructor
     *
+    * If $params is not an array but instead numeric, it will be 
+    * considered as a shortcut to be $params[id]
+    *
     * If $params[id] is given data can be load():ed from database.
     *
     * If $params[key] is given that column will be used  
@@ -111,7 +114,7 @@ class DB_DataContainer {
     * object properties.
     *
     * @param	object  $dbh a PEAR database handler object.
-    * @param	array   $params (see above)
+    * @param	mixed   $params numerical id or array of parameters
     * @return   object
     */  
 
