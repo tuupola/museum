@@ -16,7 +16,7 @@ print $status;
 --FILE--
 <?php 
 require_once('./skipif.php');
-require_once('Person.php');
+require_once('./Person.php');
 $params  = array();
 $p = new Person($dbh, $params);
 $p->createDB();
