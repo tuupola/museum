@@ -14,11 +14,13 @@ if (version_compare(phpversion(), '5.0.0', 'ge')) {
 
 } else {
 
-    class DB_DataContainer_Overload {
-        function __call($method,$args,&$return) {
-            return $this->___call($method,$args,$return);
-        }                               
-    }
+    eval('
+        class DB_DataContainer_Overload {
+            function __call($method,$args,&$return) {
+                return $this->___call($method,$args,$return);
+            }                               
+        }
+    ');
 
 }
 
