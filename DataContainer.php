@@ -2,38 +2,40 @@
 
 /* vim: set ts=4 sw=4: */
 
-// +-----------------------------------------------------------------------+
-// | Copyright (c) 2002-2003, Mika Tuupola                                 |
-// | All rights reserved.                                                  |
-// |                                                                       |
-// | Redistribution and use in source and binary forms, with or without    |
-// | modification, are permitted provided that the following conditions    |
-// | are met:                                                              |
-// |                                                                       |
-// | o Redistributions of source code must retain the above copyright      |
-// |   notice, this list of conditions and the following disclaimer.       |
-// | o Redistributions in binary form must reproduce the above copyright   |
-// |   notice, this list of conditions and the following disclaimer in the |
-// |   documentation and/or other materials provided with the distribution.|
-// | o The names of the authors may not be used to endorse or promote      |
-// |   products derived from this software without specific prior written  |
-// |   permission.                                                         |
-// |                                                                       |
-// | THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS   |
-// | "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT     |
-// | LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR |
-// | A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT  |
-// | OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, |
-// | SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT      |
-// | LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, |
-// | DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY |
-// | THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT   |
-// | (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE |
-// | OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.  |
-// |                                                                       |
-// +-----------------------------------------------------------------------+
-// | Author: Mika Tuupola <tuupola@appelsiini.net>                         |
-// +-----------------------------------------------------------------------+
+/*
++-----------------------------------------------------------------------+
+| Copyright (c) 2002-2003, Mika Tuupola                                 |
+| All rights reserved.                                                  |
+|                                                                       |
+| Redistribution and use in source and binary forms, with or without    |
+| modification, are permitted provided that the following conditions    |
+| are met:                                                              |
+|                                                                       |
+| o Redistributions of source code must retain the above copyright      |
+|   notice, this list of conditions and the following disclaimer.       |
+| o Redistributions in binary form must reproduce the above copyright   |
+|   notice, this list of conditions and the following disclaimer in the |
+|   documentation and/or other materials provided with the distribution.|
+| o The names of the authors may not be used to endorse or promote      |
+|   products derived from this software without specific prior written  |
+|   permission.                                                         |
+|                                                                       |
+| THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS   |
+| "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT     |
+| LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR |
+| A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT  |
+| OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, |
+| SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT      |
+| LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, |
+| DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY |
+| THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT   |
+| (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE |
+| OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.  |
+|                                                                       |
++-----------------------------------------------------------------------+
+| Author: Mika Tuupola <tuupola@appelsiini.net>                         |
++-----------------------------------------------------------------------+
+*/
 
 /* $Id$ */
 
@@ -60,44 +62,46 @@ class DB_DataContainer {
     */
     var $id;           
 
-   /**
+  /**
     * PEAR database handler
     * @accesss  private
     * @see      DB
     */
     var $dbh;
  
-   /**
+  /**
     * Table in which data is stored
     * @access   private
     */
     var $table;
 
-   /**
+  /**
     * What column to use as non-default key
     * @access   private
     */
     var $key;
 
-   /**
+  /**
     * Flag whether were running on strict mode or not.
     * @access   private
     */
     var $strict;
           
-   /**
+  /**
     * The class constructor
     *
-    * If $params[id] is given will create the datacontainer from
-    * data queried from database. Otherwise will try to create
-    * the object from given array of.
+    * If $params[id] is given data can be load():ed from database.
     *
-    * If $params[key] is given that column will be used instead
-    * of column 'id'. 
+    * If $params[key] is given that column will be used  
+    * instead of the default column named 'id' when load():ing data
+    * from database.
     *
-    * $params[$params[key]] _must_ be given together with $params[key]
+    * If $params[key] was given you also must provide $params[$params[key]].
+    * For example if $params[key] = 'foo', you must give something
+    * like $params[foo] = 27.
     *
-    * $params[table] is mandatory
+    * $params[table] contains the name of the table in the database.
+    * This parameter is mandatory.
     *
     * $params[strict] flag defines wheter to use accessor method
     * for setting object properties (the default) or set them by
@@ -107,8 +111,8 @@ class DB_DataContainer {
     * object properties.
     *
     * @param	object  $dbh a PEAR database handler object.
-    * @param	array   $params 
-    * @return	object
+    * @param	array   $params (see above)
+    * @return   object
     */  
 
 
@@ -121,6 +125,15 @@ class DB_DataContainer {
         
     }
 
+  /**
+    * Load the container
+    *
+    * Populates the container object with data from database.
+    * This is possible only if container has an id or an alternate
+    * key and its value is available.
+    *
+    * @return   mixed true on success PEAR error on failure
+    */  
 
     function load() {
 
@@ -154,7 +167,7 @@ class DB_DataContainer {
     }
 
   /**
-    * Save the object
+    * Save the container
     *
     * If $id is not given will use the objects own id. If $id not
     * given and object does not have an $id will set the $id when
@@ -292,41 +305,75 @@ class DB_DataContainer {
         return($this->table);
     }
 
+  /**
+    * Get the strict flag
+    *
+    * @return    boolean
+    */  
     function getStrict() {
         return($this->strict);
     }
 
+  /**
+    * Set the database handle
+    */  
     function setDbh($value) {
         $this->dbh = $value;
     }
 
+  /**
+    * Set id of the object
+    */  
     function setId($value) {
         $this->id = $value;
     }
 
+  /**
+    * Set the key to be used when loading
+    */  
     function setKey($value) {
         $this->key = $value;
     }
 
+  /**
+    * Set the table to be used in the database
+    */  
     function setTable($value) {
         $this->table = $value;
     }
 
+  /**
+    * Set the strict flag
+    */  
     function setStrict($value) {
         $this->strict = $value;
     }
 
 
   /**
-    * Get array of DataObjects
+    * Get array of DataContainer
     *
-    * If $params[where] is given it will added to sql query
-    * as WHERE $params[where].
+    * $params[classname] has the name of the class(es) function
+    * has to return.
+    *
+    * $params[classname] has the name of the table to load data
+    * from. If not given defaults to $params[classname].
+    *
+    * $params[order] translates to 'ORDER BY $params[order]'
+    *
+    * $params[where] translates to 'WHERE $params[where]'
+    *
+    * $params[limit] can be given one or two values. If only one 
+    * value is given it will be considered as $count. If two values
+    * are given they will be considered as $from, $count. Value can
+    * be given as a string or an array. For example: '5,10' or
+    * array(5,10). If only one value is given $from will be
+    * considered as 0.
     *
     * @param	object  $dbh a PEAR database handler object.
     * @param	array   $params (table, classname, where, order, limit, query)
-    * @access	static
-    * @return	mixed   array of objects on success PEAR_Error on failure
+    * @access   static
+    * @return   mixed   array of objects on success PEAR_Error on failure
     */  
 
     /* TODO: Classname still needs to be given as parameter       */
@@ -360,7 +407,7 @@ class DB_DataContainer {
                 } elseif (isset($params['order'])) {
                     $query .= "ORDER BY $params[order] ";
                 } 
-                /* TODO: consider using DB::limitQuery() */
+                /* TODO: test with other drivers than MySQL too */
                 if (isset($params['limit'])) {
                     if (is_array($params['limit'])) {
                         $from  = $params['limit'][0];
@@ -376,7 +423,6 @@ class DB_DataContainer {
                           $count = $temp[0];
                         }
                     }
-//                    $query .= "LIMIT $params[limit] ";
                     $query = $dbh->modifyLimitQuery($query, $from, $count);
                 }
             }
