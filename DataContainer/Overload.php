@@ -6,9 +6,9 @@ if (version_compare(phpversion(), '5.0.0', 'ge')) {
 
     class DB_DataContainer_Overload {
         function __call($method,$args) {
-            $return = null;
-            $this->___call($method,$args,$return);
-            return $return;
+            $retval = null;
+            $this->___call($method,$args,$retval);
+            return($retval);
         }
     }
 
@@ -16,9 +16,9 @@ if (version_compare(phpversion(), '5.0.0', 'ge')) {
 
     eval('
         class DB_DataContainer_Overload {
-            function __call($method,$args,&$return) {
-                return $this->___call($method,$args,$return);
-            }                               
+            function __call($method,$args,&$retval) {
+                return($this->___call($method,$args,$retval));
+            }
         }
     ');
 
