@@ -1,7 +1,5 @@
 <?php
 
-/* $Id$ */
-
 require_once('DB.php');
 
 $user = '';

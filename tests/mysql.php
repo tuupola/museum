@@ -4,7 +4,7 @@
 
 require_once('DB.php');
 
-$user = 'root';
+$user = '';
 $pass = '';
 $host = 'localhost';
 $db_name = 'test';
