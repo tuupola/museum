@@ -4,7 +4,7 @@
 
 /*
 +-----------------------------------------------------------------------+
-| Copyright (c) 2002-2003, Mika Tuupola                                 |
+| Copyright (c) 2002-2004, Mika Tuupola                                 |
 | All rights reserved.                                                  |
 |                                                                       |
 | Redistribution and use in source and binary forms, with or without    |
@@ -125,9 +125,17 @@ class DB_DataContainer {
         $strict = isset($params['strict']) ? $params['strict'] : true;
         $this->setStrict($strict);
 
-        /* tablename default to classname */
-        $table = isset($params['table']) ? $params['table'] : get_class($this);
+        $class = get_class($this);
+
+        /* tablename defaults to classname */
+        $table = isset($params['table']) ? $params['table'] : $class;
         $this->setTable($table);
+
+        /* overload by default if we have a decent php */
+        $version = phpversion();
+        if (version_compare($version, '4.3.2-RC2', 'ge')) {
+            overload($class);
+        }
 
         if (is_array($params)) {
             $this->setProperties($params);
