@@ -99,6 +99,10 @@ class DB_DataContainer {
     *
     * $params[table] is mandatory
     *
+    * $params[strict] flag defines wheter to use accessor method
+    * for setting object properties (the default) or set them by
+    * directly accessing $this->property.
+    *
     * Rest of the data given in $params will be mapped against
     * object properties.
     *
@@ -110,10 +114,10 @@ class DB_DataContainer {
 
     function DB_DataContainer($dbh, $params) {
 
-        $this->dbh   = $dbh;
-        $strict = $params['strict'] ? $params['strict'] : true;
+        $strict    = $params['strict'] ? $params['strict'] : true;
         $this->setStrict($strict);
         $this->setProperties($params);
+        $this->setDBH($dbh);
         
     }
 
@@ -290,6 +294,10 @@ class DB_DataContainer {
 
     function getStrict() {
         return($this->strict);
+    }
+
+    function setDbh($value) {
+        $this->dbh = $value;
     }
 
     function setId($value) {
