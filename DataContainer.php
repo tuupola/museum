@@ -190,6 +190,8 @@ class DB_DataContainer {
                         $key = strtolower($key);
                         $this->$key = $val;
                     }
+                    /* successfull load returns true */
+                    $result = true;
                 } elseif ($count > 1) {
                     /* use first match and discard others additionally */
                     /* raise an error                                 */
