@@ -14,8 +14,9 @@ class Person extends DB_DataContainer {
     var $lastname;
     var $mobile;
 
+    /* NOTE: You can leave the constructor away from sibling */
+    /* if all default values are used                        */
     function Person($dbh, $params) {
-        overload('Person');
         $this->DB_DataContainer($dbh, $params);    
     }
 
