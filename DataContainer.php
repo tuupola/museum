@@ -155,18 +155,41 @@ class DB_DataContainer {
             $query  = "SELECT * FROM $this->table
                        WHERE ($this->key='{$this->{$this->key}}') ";
 
-            $result = $this->dbh->query($query);
+            /* it would make sense to use getRow() performancewise */
+            /* but we could not warn if there was multiple matches */
+            $result = $this->dbh->getAll($query, array(), DB_FETCHMODE_ASSOC);
             if (DB::isError($result)) {
 
             } else {
-                $row = $result->fetchRow(DB_FETCHMODE_ASSOC);
-                if (is_array($row)) {
-                    foreach ($row as $key=>$val) {
+                  
+                $count = count($result);
+                /* SELECT did not return anything */
+                if ($count == 0) {
+                    $message = sprintf('No data found for key %s with value %s.',
+                                        $this->key,
+                                        $this->{$this->key});
+
+                    $result = PEAR::raiseError($message);
+                } elseif ($count == 1) {
+                    foreach ($result[0] as $key=>$val) {
                         /* TODO: ugly hack to fix mixed case trouble */
                         $key = strtolower($key);
                         $this->$key = $val;
                     }
+                } elseif ($count > 1) {
+                    /* use first match and discard others additionally */
+                    /* raise an error                                 */
+                    foreach ($result[0] as $key=>$val) {
+                        /* TODO: ugly hack to fix mixed case trouble */
+                        $key = strtolower($key);
+                        $this->$key = $val;
+                    }
+                    $message = sprintf('%d matches found. Using first match.',
+                                        $count);
+
+                    $result = PEAR::raiseError($message);
                 }
+
             }
         } else {
             $result = PEAR::raiseError('Container does not have a key.');
