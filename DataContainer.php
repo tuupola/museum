@@ -249,7 +249,8 @@ class DB_DataContainer {
 
     function setProperties($params) {
 
-        /* TODO: PEAR errorhandling if $params != array */
+        /* TODO: PEAR errorhandling if $params != array    */
+        /* TODO: add possibility to pass data as an object */
         if (is_array($params)) {
 
             /* use accessor methods */
