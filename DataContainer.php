@@ -529,22 +529,21 @@ class DB_DataContainer extends DB_DataContainer_Overload {
 
           $var     = get_object_vars($this);
           $retval = false;
-          
+
           if (strpos($method, 'get') === 0) {
-              $property =  substr($method, 3);
+              $property =  strtolower(substr($method, 3));
               if (array_key_exists($property, $var)) {
                   $return = $this->$property;
                   $retval = true;
               }
           } elseif (strpos($method, 'set') === 0) {
-              $property =  substr($method, 3);
+              $property =  strtolower(substr($method, 3));
               if (array_key_exists($property, $var)) {
                   $this->$property = $params[0];
                   $return = null;
                   $retval = true;
               }
           }
-           
         return($retval);  
     }
 
