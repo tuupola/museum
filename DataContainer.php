@@ -58,7 +58,7 @@ class DataContainer {
     * @return	object
     */  
 
-    function create($dbh, $params) {
+    function DataContainer($dbh, $params) {
 
         $this->dbh   = $dbh;
         
