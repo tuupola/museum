@@ -437,7 +437,51 @@ class DB_DataContainer {
             }
         }
         return($retval);     
-    }        
+    }
+
+    function generateMethods($child) {
+
+        /* overload extension was buggy before 4.3.2-RC1 */
+        if (version_compare(PHP_VERSION, '4.3.2-RC', '<=')) {
+
+            $var      = get_class_vars($child);
+            $method   = get_class_methods($child);
+            $retval   = 0;
+
+            foreach ($var as $key => $val) {
+  
+                $function = 'get' . $key;
+                if (!(array_search($function, $method))) {
+                    $str  = "function $function(\$object) {";
+                    $str .= "return(\$object->$key);";
+                    $str .= "}";
+                    $retval++;
+                    eval($str);
+                }
+
+                $function = 'set' . $key;
+                if (!(array_search($function, $method))) {
+                    $str  = "function $function(&\$object, \$input='') {";
+                    $str .= "\$object->$key = \$input;";
+                    $str .= "print_r(\$object);";
+                    $str .= "}";
+                    $retval++;
+                    eval($str);
+                }
+            }
+
+        } else {
+            $retval = PEAR::raiseError('PHP 4.3.2-RC or later needed.');
+        }
+
+        return($retval);
+
+    }
+
+    function __call($method,$params,&$return) {
+        $return=$method($this, $params[0]);
+        return(true);
+    }
 
 }
 
