@@ -3,12 +3,13 @@
 
 <package>
   <name>DB_DataContainer</name>
-  <summary>SQL data encapsulation</summary>
+  <summary>Data persistence and encapsulation</summary>
   <description>
 Provides persistence layer for object data to be stored in PEAR DB
 supported databases. Included common methods for saving, retrieving and
 deleting data with automatic query generation. Multiobject retrieving
-supported with static function call.
+supported with static function call. Runtime generation of accessor methods
+supported with recent PHP.
      generation.
   </description>
 
@@ -23,13 +24,11 @@ supported with static function call.
 
   <release>
     <license>BSD</license>
-    <version>0.9.0</version>
-    <date>2003-04-02</date>
+    <version>0.11.0</version>
+    <date>2003-05-02</date>
     <state>beta</state>
     <notes>
-* First release candidate.
-* Uses DB::autoExecute() instead of internally building the queries.
-* Tested to work with Postgres and MySQL
+* Overloaded accessor methods are now handled more intelligently.
     </notes>
     <filelist>
       <dir name="/" baseinstalldir="DB">
@@ -39,6 +38,21 @@ supported with static function call.
   </release>
 
   <changelog>
+    <release>
+      <version>0.10.0</version>
+      <notes>
+* Support for autogenerating accessor methods in runtime added.
+      </notes>
+    </release>
+
+    <release>
+      <version>0.9.0</version>
+      <notes>
+* First release candidate.
+* Uses DB::autoExecute() instead of internally building the queries.
+* Tested to work with Postgres and MySQL
+      </notes>
+    </release>
 
     <release>
       <version>0.0.4</version>
