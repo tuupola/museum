@@ -41,6 +41,7 @@
 
 require_once('DB.php');
 require_once('PEAR.php');
+require_once('DB/DataContainer/Overload.php');
 
 /**
   * DB_DataContainer class
@@ -48,9 +49,8 @@ require_once('PEAR.php');
   * @version	$Revision$
   * @author	Mika Tuupola <tuupola@appelsiini.net>
   */  
-
-
-class DB_DataContainer {
+    
+class DB_DataContainer extends DB_DataContainer_Overload {
 
   /**
     * Id of the data if exists the database. 
@@ -525,7 +525,7 @@ class DB_DataContainer {
     *
     */  
 
-    function __call($method, $params, $return='') {
+    function ___call($method, $params, &$return) {
 
           $var     = get_object_vars($this);
           $retval = false;
