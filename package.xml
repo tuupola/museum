@@ -8,8 +8,8 @@
 Provides persistence layer for object data to be stored in PEAR DB
 supported databases. Included common methods for saving, retrieving and
 deleting data with automatic query generation. Multiobject retrieving
-supported with static function call. Runtime generation of accessor methods
-supported with recent PHP.
+supported with static function call. Runtime generation of accessor 
+methods supported with recent PHP.
      generation.
   </description>
 
@@ -24,46 +24,27 @@ supported with recent PHP.
 
   <release>
     <license>BSD</license>
-    <version>1.0.0</version>
-    <date>2003-06-23</date>
+    <version>1.0.1</version>
+    <date>2003-10-08</date>
     <state>stable</state>
     <notes>
-* Stable release
-* Fixes mssql LIMIT problems
-* Fixes mssql regression tests
+* Unified regression tests
     </notes>
     <filelist>
       <dir name="/" baseinstalldir="DB">
          <file role="php" name="DataContainer.php" />
       </dir>
       <dir name="tests" role="test">
-         <file role="test" name="run-tests.patch" />
          <file role="test" name="Person.php" />
-         <file role="test" name="setproperties.phpt" />
-         <file role="test" name="overload.phpt" />
-         <file role="test" name="mysql.php" />
-         <file role="test" name="mysql_limit.phpt" />
-         <file role="test" name="mysql_load.phpt" />
-         <file role="test" name="mysql_order.phpt" />
-         <file role="test" name="mysql_save.phpt" />
-         <file role="test" name="mysql_where.phpt" />
-         <file role="test" name="postgres.php" />
-         <file role="test" name="postgres_load.phpt" />
-         <file role="test" name="postgres_order.phpt" />
-         <file role="test" name="postgres_save.phpt" />
-         <file role="test" name="postgres_where.phpt" />
-         <file role="test" name="mssql.php" />
-         <file role="test" name="mssql_limit.phpt" />
-         <file role="test" name="mssql_load.phpt" />
-         <file role="test" name="mssql_order.phpt" />
-         <file role="test" name="mssql_save.phpt" />
-         <file role="test" name="mssql_where.phpt" />
-      </dir>
-      <dir name="pear" role="test">
-         <file role="test" name="README" />
-      </dir>
-      <dir name="ext" role="test">
-         <file role="test" name="README" />
+         <file role="test" name="setup.php" />
+         <file role="test" name="skipif.php" />
+         <file role="test" name="01setproperties.phpt" />
+         <file role="test" name="02overload.phpt" />
+         <file role="test" name="03load.phpt" />
+         <file role="test" name="04save.phpt" />
+         <file role="test" name="05limit.phpt" />
+         <file role="test" name="06order.phpt" />
+         <file role="test" name="07where.phpt" />
       </dir>
     </filelist>
   </release>
@@ -72,6 +53,15 @@ supported with recent PHP.
   </deps>
 
   <changelog>
+
+    <release>
+      <version>1.0.0</version>
+      <notes>
+* Stable release
+* Fixes mssql LIMIT problems
+* Fixes mssql regression tests
+      </notes>
+    </release>
 
     <release>
       <version>0.12.0</version>
