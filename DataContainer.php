@@ -120,7 +120,11 @@ class DB_DataContainer {
 
         $strict = isset($params['strict']) ? $params['strict'] : true;
         $this->setStrict($strict);
-        $this->setProperties($params);
+        if (is_array($params)) {
+            $this->setProperties($params);
+        } else if (is_numeric($params)){
+            $this->setId($params);
+        }
         $this->setDBH($dbh);
     }
 
