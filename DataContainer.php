@@ -58,7 +58,7 @@ class DataContainer {
     * @return	object
     */  
 
-    function DataContainer($dbh, $params) {
+    function create($dbh, $params) {
 
         $this->dbh   = $dbh;
         
@@ -69,7 +69,7 @@ class DataContainer {
         $key = $params[key] ? $params[key] : 'id';
 
         /* if we have an id or key load up data from the database  */
-        /* and discard any possible data given in $params          */
+        /* and discard any possible data given in $params.         */
         if ($this->id || $params[key]) {
             $query  = "SELECT * FROM $this->table
                        WHERE ($key='{$this->$key}') ";
@@ -88,7 +88,6 @@ class DataContainer {
                 }
             }
         }
-
     }
 
   /**
