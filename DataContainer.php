@@ -426,7 +426,8 @@ class DB_DataContainer {
                 /* no need to call load() after fetching objects  */
                 /* uses more memory but causes only one SELECT    */
                 while ($row = $result->fetchRow(DB_FETCHMODE_ASSOC)) {
-                    $row['table'] = $params['table'];
+                    $row['table']  = $params['table'];
+                    $row['strict'] = $params['strict'];
                     $c = new $params['classname']($dbh, $row);
                     array_push($retval, $c);
                     unset($c);
