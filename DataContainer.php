@@ -120,7 +120,7 @@ class DataContainer {
         if ($id) { 
     
             $prepend = "UPDATE $this->table SET ";
-            $append  = "WHERE (id='$this->id') ";
+            $append  = " WHERE (id='$this->id') ";
         
         } else {
             
