@@ -137,6 +137,7 @@ class DB_DataContainer {
             overload($class);
         }
 
+        /* if only passing id no need to pass it in array */
         if (is_array($params)) {
             $this->setProperties($params);
         } else if (is_numeric($params)){
@@ -166,8 +167,21 @@ class DB_DataContainer {
             $this->key = 'id';
         }
         if ($this->key) {
-            $query  = "SELECT * FROM $this->table
-                       WHERE ($this->key='{$this->{$this->key}}') ";
+
+            /* do not do a SELECT * but SELECT x,y,z ... instead */
+            $var    = get_object_vars($this);
+
+            /* This wont work prior to PHP 4.2.0 */
+            $ignore = get_class_vars('DB_DataContainer');
+            foreach($ignore as $key => $val) {
+                unset($var[$key]);
+            }  
+
+            $select  = implode(',', array_keys($var));            
+            $select .= ',id';
+
+            $query   = "SELECT $select FROM $this->table
+                        WHERE ($this->key='{$this->{$this->key}}') ";
 
             /* it would make sense to use getRow() performancewise */
             /* but we could not warn if there was multiple matches */
