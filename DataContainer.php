@@ -13,7 +13,7 @@ require_once('PEAR.php');
   */  
 
 
-class DataContainer {
+class DB_DataContainer {
 
   /**
     * Id of the data if exists the database. 
@@ -65,7 +65,7 @@ class DataContainer {
     */  
 
 
-    function DataContainer($dbh, $params) {
+    function DB_DataContainer($dbh, $params) {
 
         $this->dbh   = $dbh;
         
@@ -188,6 +188,12 @@ class DataContainer {
      
         return($retval);
     } 
+
+    function setProperties($params) {
+        foreach ($params as $prop=>$val) {
+            $this->$prop = $val;
+        }
+    }
 
   /**
     * Get the id
