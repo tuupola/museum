@@ -399,7 +399,7 @@ class DB_DataContainer {
                 } elseif (isset($params['order'])) {
                     $query .= "ORDER BY $params[order] ";
                 } 
-                /* TODO: test with other drivers than Postgres and MySQL  */
+                /* TODO: test with other drivers than pgsql, mysql and mssql  */
                 if (isset($params['limit'])) {
                     if (is_array($params['limit'])) {
                         $from  = $params['limit'][0];
@@ -415,11 +415,11 @@ class DB_DataContainer {
                           $count = $temp[0];
                         }
                     }
-                    $query = $dbh->modifyLimitQuery($query, $from, $count);
+                    $result = $dbh->limitQuery($query, $from, $count);
+                } else {
+                    $result = $dbh->query($query);
                 }
             }
-
-            $result = $dbh->query($query);
 
             if (DB::isError($result)) {
                 $retval = $result;
