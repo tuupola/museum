@@ -66,6 +66,9 @@ supported with recent PHP.
       </dir>
     </filelist>
   </release>
+  <deps>
+    <dep type="php" rel="ge">4.2.0</dep>
+  </deps>
 
   <changelog>
     <release>
