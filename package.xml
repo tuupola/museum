@@ -34,7 +34,7 @@ methods supported with recent PHP.
       <dir name="/" baseinstalldir="DB">
          <file role="php" name="DataContainer.php" />
       </dir>
-      <dir name="/DataContainer/" baseinstalldir="DB">
+      <dir name="/DataContainer" baseinstalldir="DB">
          <file role="php" name="Overload.php" />
       </dir>
       <dir name="tests" role="test">
