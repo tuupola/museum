@@ -35,7 +35,13 @@ class DataContainer {
     * @access	private
     */
     var $table;
-     
+
+   /**
+    * What to use as non-default key
+    * @access	private
+    */
+    var $key;
+          
    /**
     * The class constructor
     *
@@ -58,6 +64,7 @@ class DataContainer {
     * @return	object
     */  
 
+
     function DataContainer($dbh, $params) {
 
         $this->dbh   = $dbh;
@@ -65,20 +72,23 @@ class DataContainer {
         foreach ($params as $prop=>$val) {
             $this->$prop = $val;
         }
+        
+    }
 
-        $key = $params[key] ? $params[key] : 'id';
+
+    function load() {
 
         /* if we have an id or key load up data from the database  */
         /* and discard any possible data given in $params.         */
-        if ($this->id || $params[key]) {
+        if ($this->id || $this->key) {
             $query  = "SELECT * FROM $this->table
-                       WHERE ($key='{$this->$key}') ";
+                       WHERE ($this->key='{$this->{$this->key}}') ";
 
             // print "<FONT COLOR=#FF0000>$query</FONT><BR>";  
 
             $result = $this->dbh->query($query);
             if (DB::isError($result)) {
-                print $result->getDebugInfo(); 
+               //  print $result->getDebugInfo(); 
             } else {
                 $row = $result->fetchRow(DB_FETCHMODE_ASSOC);
                 if (is_array($row)) {
@@ -88,6 +98,7 @@ class DataContainer {
                 }
             }
         }
+        return($result);
     }
 
   /**
