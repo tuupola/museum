@@ -122,7 +122,6 @@ class DB_DataContainer {
         $this->setStrict($strict);
         $this->setProperties($params);
         $this->setDBH($dbh);
-        
     }
 
   /**
@@ -213,7 +212,7 @@ class DB_DataContainer {
         }
         /* bring back id when needed */
         if ($mode == DB_AUTOQUERY_INSERT) {
-            $var[id] = $this->getId();
+            $var['id'] = $this->getId();
         }
 
         $table = $this->getTable();
@@ -373,11 +372,13 @@ class DB_DataContainer {
 
     function getObjects($dbh, $params='') {
 
+        $retval = array();
+
         if (!(trim($params['classname']))) {
             $retval = PEAR::raiseError('Need $params[classname]');
-        } elseif (!(trim($params['table']))) {  
+        } elseif (!(isset($params['table']))) {  
               /* defaults to $params[classname] */
-              $params['table'] = $params[classname];
+              $params['table'] = $params['classname'];
         }
 
         if (!(PEAR::isError($retval))) {
