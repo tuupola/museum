@@ -16,9 +16,11 @@ class Person extends DB_DataContainer {
 
     /* NOTE: You can leave the constructor away from sibling */
     /* if all default values are used                        */
+/*   
     function Person($dbh, $params) {
         $this->DB_DataContainer($dbh, $params);    
     }
+*/
 
     function createDB() {
         $this->dbh->query("DROP TABLE $this->table ");
