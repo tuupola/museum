@@ -28,7 +28,9 @@ methods supported with recent PHP.
     <date>2003-10-14</date>
     <state>stable</state>
     <notes>
-
+* Hardcoded queries were silently ignored (bug noticed by 
+  Pierfrancesco Marsiaj)
+* Added regressions tests for hardcoded queries and delete() method
     </notes>
     <filelist>
       <dir name="/" baseinstalldir="DB">
