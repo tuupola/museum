@@ -525,8 +525,7 @@ class DB_DataContainer {
     *
     */  
 
-//    function __call($method,$params,&$return) {
-    function __call($method,$params) {
+    function __call($method, $params, $return='') {
 
           $var     = get_object_vars($this);
           $retval = false;
