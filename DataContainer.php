@@ -393,7 +393,7 @@ class DB_DataContainer {
             /* if we have an hardcoded query no need to generate one  */
             if (isset($params['query'])) {
 
-                $query = $params['query'];
+                $result = $dbh->query($params['query']); 
 
             } else {
 
