@@ -32,7 +32,7 @@
 // | OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.  |
 // |                                                                       |
 // +-----------------------------------------------------------------------+
-// | Author: Mika Tuupola <tuupola@appelsiini.net>                         |   
+// | Author: Mika Tuupola <tuupola@appelsiini.net>                         |
 // +-----------------------------------------------------------------------+
 
 /* $Id$ */
@@ -78,11 +78,17 @@ class DB_DataContainer {
     * @access   private
     */
     var $key;
+
+   /**
+    * Flag whether were running on strict mode or not.
+    * @access   private
+    */
+    var $strict;
           
    /**
     * The class constructor
     *
-    * If $params[id] is given will create the dataobject from
+    * If $params[id] is given will create the datacontainer from
     * data queried from database. Otherwise will try to create
     * the object from given array of.
     *
@@ -102,10 +108,12 @@ class DB_DataContainer {
     */  
 
 
-    function DB_DataContainer($dbh, $params, $strict=true) {
+    function DB_DataContainer($dbh, $params) {
 
         $this->dbh   = $dbh;
-        $this->setProperties($params, $strict);
+        $strict = $params['strict'] ? $params['strict'] : true;
+        $this->setStrict($strict);
+        $this->setProperties($params);
         
     }
 
@@ -233,11 +241,11 @@ class DB_DataContainer {
     * @param  array  $params
     */
 
-    function setProperties($params, $strict=true) {
+    function setProperties($params) {
         if (is_array($params)) {
 
             /* use accessor methods */
-            if ($strict) {
+            if ($this->getStrict()) {
                 foreach ($params as $key => $value) {
                     $method = 'set' . $key;
                     $this->$method($value);
@@ -280,6 +288,10 @@ class DB_DataContainer {
         return($this->table);
     }
 
+    function getStrict() {
+        return($this->strict);
+    }
+
     function setId($value) {
         $this->id = $value;
     }
@@ -290,6 +302,10 @@ class DB_DataContainer {
 
     function setTable($value) {
         $this->table = $value;
+    }
+
+    function setStrict($value) {
+        $this->strict = $value;
     }
 
 
