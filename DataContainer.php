@@ -125,7 +125,7 @@ class DB_DataContainer {
         $strict = isset($params['strict']) ? $params['strict'] : true;
         $this->setStrict($strict);
 
-        $class = get_class($this);
+        $class = strtolower(get_class($this));
 
         /* tablename defaults to classname */
         $table = isset($params['table']) ? $params['table'] : $class;
@@ -133,7 +133,8 @@ class DB_DataContainer {
 
         /* overload by default if we have a decent php */
         $version = phpversion();
-        if (version_compare($version, '4.3.2-RC2', 'ge')) {
+        if (version_compare($version, '4.3.2-RC2', 'ge') &&
+            version_compare($version, '5.0.0', 'lt')) {
             overload($class);
         }
 
@@ -524,7 +525,8 @@ class DB_DataContainer {
     *
     */  
 
-    function __call($method,$params,&$return) {
+//    function __call($method,$params,&$return) {
+    function __call($method,$params) {
 
           $var     = get_object_vars($this);
           $retval = false;
