@@ -148,8 +148,9 @@ class DB_DataContainer {
     * given and object does not have an $id will set the $id when
     * executing the INSERT.
     *
+    * @todo     consider using DB:autoExecute()
     * @param	integer $id (optional)
-    * @return	mixed true on success PEAR error on failure
+    * @return   mixed true on success PEAR error on failure
     */  
 
     function save($id='') {
@@ -299,12 +300,12 @@ class DB_DataContainer {
     * as WHERE $params[where].
     *
     * @param	object  $dbh a PEAR database handler object.
-    * @param	array   $params (table, classname, where, order, autoload)
+    * @param	array   $params (table, classname, where, order, limit, query)
     * @access	static
     * @return	mixed   array of objects on success PEAR_Error on failure
     */  
 
-    /* TODO: Classname still needs to be given as parameter        */
+    /* TODO: Classname still needs to be given as parameter       */
     /*       until there is a way for static method to determine  */
     /*       which class it belongs to. Make this more elegant.   */
 
@@ -334,7 +335,8 @@ class DB_DataContainer {
                     $query .= "ORDER BY $params[orderby] ";
                 } elseif (isset($params['order'])) {
                     $query .= "ORDER BY $params[order] ";
-                }
+                } 
+                /* TODO: consider using DB::limitQuery() */
                 if (isset($params['limit'])) {
                     $query .= "LIMIT $params[limit] ";
                 }
