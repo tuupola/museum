@@ -18,27 +18,29 @@ class DB_DataContainer {
   /**
     * Id of the data if exists the database. 
     *
-    * Will have value only if the dataobject was read from the database.
+    * Should only have value only if the data was read from the 
+    * database or if you are updating existing object.
     *
-    * @access	private
+    * @access   private
     */
     var $id;           
 
    /**
     * PEAR database handler
-    * @access	private
+    * @accesss  private
+    * @see      DB
     */
     var $dbh;
  
    /**
     * Table in which data is stored
-    * @access	private
+    * @access   private
     */
     var $table;
 
    /**
-    * What to use as non-default key
-    * @access	private
+    * What column to use as non-default key
+    * @access   private
     */
     var $key;
           
@@ -68,10 +70,7 @@ class DB_DataContainer {
     function DB_DataContainer($dbh, $params) {
 
         $this->dbh   = $dbh;
-        
-        foreach ($params as $prop=>$val) {
-            $this->$prop = $val;
-        }
+        $this->setProperties($params);
         
     }
 
@@ -189,9 +188,20 @@ class DB_DataContainer {
         return($retval);
     } 
 
+
+   /**
+    * Set class properties
+    *
+    * @access public
+    * @param  array  $params
+    */
+
     function setProperties($params) {
-        foreach ($params as $prop=>$val) {
-            $this->$prop = $val;
+        if (is_array($params)) {
+            foreach ($params as $key => $value) {
+                $method = set . $key;
+                $this->$method($value);
+            }
         }
     }
 
@@ -220,6 +230,18 @@ class DB_DataContainer {
     */  
     function getTable() {
         return($this->table);
+    }
+
+    function setId($value) {
+        $this->id = $value;
+    }
+
+    function setKey($value) {
+        $this->key = $value;
+    }
+
+    function setTable($value) {
+        $this->table = $value;
     }
 
 
