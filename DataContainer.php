@@ -85,17 +85,17 @@ class DB_DataContainer {
     */  
 
 
-    function DB_DataContainer($dbh, $params) {
+    function DB_DataContainer($dbh, $params, $strict=true) {
 
         $this->dbh   = $dbh;
-        $this->setProperties($params);
+        $this->setProperties($params, $strict);
         
     }
 
 
     function load() {
 
-        $result = 0;
+        $result = true;
 
         /* if we have an id or key load up data from the database  */
         /* and discard any possible data given in $params.         */
@@ -103,7 +103,6 @@ class DB_DataContainer {
         if ($this->id) {
             $this->key = 'id';
         }
-//        if ($this->id || $this->key) {
         if ($this->key) {
             $query  = "SELECT * FROM $this->table
                        WHERE ($this->key='{$this->{$this->key}}') ";
@@ -121,6 +120,8 @@ class DB_DataContainer {
                     }
                 }
             }
+        } else {
+            $result = PEAR::raiseError('Object does not have a key.');
         }
         return($result);
     }
@@ -146,7 +147,7 @@ class DB_DataContainer {
              $this->id = $id;
              
         // if $id was not given try to use objects own id. If even that
-        // does not exist the object must have been created from POST:ed
+        // does not exist the object must have been created from submitted
         // data and the $id will be empty -> we must do an INSERT.
              
         } else {
@@ -184,7 +185,7 @@ class DB_DataContainer {
 
         $query .= $append;
 
-        // print "<FONT COLOR=#FF0000>$query</FONT><BR>";
+//        print "<FONT COLOR=#FF0000>$query</FONT><BR>";
 
         $result = $this->dbh->query($query);
 
@@ -216,11 +217,22 @@ class DB_DataContainer {
     * @param  array  $params
     */
 
-    function setProperties($params) {
+    function setProperties($params, $strict=true) {
         if (is_array($params)) {
-            foreach ($params as $key => $value) {
-                $method = 'set' . $key;
-                $this->$method($value);
+
+            /* use accessor methods */
+            if ($strict) {
+                foreach ($params as $key => $value) {
+                    $method = 'set' . $key;
+                    $this->$method($value);
+                }
+                
+            /* dont use accessor methods */
+            } else {
+                foreach ($params as $key => $value) {
+                    $method = 'set' . $key;
+                    $this->$method($value);
+                }
             }
         }
     }
@@ -282,8 +294,6 @@ class DB_DataContainer {
     /*       which class it belongs to. Make this more elegant.   */
 
     function getObjects($dbh, $params='') {
-
-        $retval = array();
 
         if (!(trim($params['classname']))) {
             $retval = PEAR::raiseError('Need $params[classname]');
