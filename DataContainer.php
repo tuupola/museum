@@ -193,21 +193,18 @@ class DB_DataContainer {
         /* an INSERT.                                                   */
              
         } else {
-             $id       = $this->id;
+            $id       = $this->id;
         }          
         
-        if ($id) {     
-            $prepend = "UPDATE $this->table SET ";
-            $append  = " WHERE (id='$this->id') ";
+        if ($id) {
+            $mode  = DB_AUTOQUERY_UPDATE;
+            $where = 'id=' . $this->getId();
         } else {
+            $mode  = DB_AUTOQUERY_INSERT;
+            $where = false;
             $this->id  = $this->dbh->nextID($this->table);
-            $prepend = "INSERT INTO $this->table SET
-                        id='$this->id', ";
-            $append  = " ";
         }
              
-        $query  = $prepend;
-
         $var    = get_object_vars($this);
 
         /* This wont work prior to PHP 4.2.0 */
@@ -215,20 +212,14 @@ class DB_DataContainer {
         foreach($ignore as $key => $val) {
             unset($var[$key]);
         }
-
-        foreach ($var as $key => $value) {
-            if ($value) {
-                $query .= "$key='$value', ";
-            }
+        /* bring back id when needed */
+        if ($mode == DB_AUTOQUERY_INSERT) {
+            $var[id] = $this->getId();
         }
 
-        $query = substr($query, 0, -2); 
+        $table = $this->getTable();
 
-        $query .= $append;
-
-        // print "<FONT COLOR=#FF0000>$query</FONT><BR>";
-
-        $result = $this->dbh->query($query);
+        $result = $this->dbh->autoExecute($table, $var, $mode, $where);
 
         return($result);
     }
@@ -245,8 +236,7 @@ class DB_DataContainer {
             $retval = $this->dbh->query($query);
         } else {
             $retval = PEAR::raiseError('Object does not have an id.');
-        }
-     
+        }     
         return($retval);
     } 
 
