@@ -187,13 +187,13 @@ class DB_DataContainer {
              
         $query  = $prepend;
 
-        $var = get_object_vars($this);
+        $var    = get_object_vars($this);
 
-        /* TODO: find a more elegant way of doing this */
-        unset($var['id']);
-        unset($var['dbh']);
-        unset($var['table']);
-        unset($var['key']);
+        /* This wont work prior to PHP 4.2.0 */
+        $ignore = get_class_vars('DB_DataContainer');       
+        foreach($ignore as $key => $val) {
+            unset($var[$key]);
+        }
 
         foreach ($var as $key => $value) {
             if ($value) {
@@ -205,7 +205,7 @@ class DB_DataContainer {
 
         $query .= $append;
 
-        print "<FONT COLOR=#FF0000>$query</FONT><BR>";
+        // print "<FONT COLOR=#FF0000>$query</FONT><BR>";
 
         $result = $this->dbh->query($query);
 
