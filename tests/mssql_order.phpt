@@ -25,7 +25,7 @@ unset($params);
 
 $params['strict']    = false;
 $params['classname'] = 'person';
-$params['order']     = "lastname";
+$params['order']     = "lastname, firstname";
 $person = Person::getObjects($dbh, $params);
 
 foreach ($person as $p) {
@@ -38,6 +38,6 @@ foreach ($person as $p) {
 --EXPECT--
 2 Kjellman Janne
 4 Laine Jenni
-1 Tuupola Mika
 3 Tuupola Juha-Matti
+1 Tuupola Mika
 
