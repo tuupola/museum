@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE package SYSTEM "../package.dtd">
+
+<package>
+  <name>DB_DataContainer</name>
+  <summary>SQL data encapsulation</summary>
+  <description>
+     Encapsulates data stored in SQL database and provides common
+     methods for saving and retrieving data with automatic query
+     generation.
+  </description>
+
+  <maintainers>
+    <maintainer>
+      <user>tuupola</user>
+      <name>Mika Tuupola</name>
+      <email>tuupola@appelsiini.net</email>
+      <role>lead</role>
+    </maintainer>
+  </maintainers>
+
+  <release>
+    <license>PHP</license>
+    <version>0.0.4</version>
+    <date>2003-03-05</date>
+    <state>beta</state>
+    <notes>
+        Internal development release.
+    </notes>
+    <filelist>
+      <dir name="/" baseinstalldir="DB">
+         <file role="php" name="DataContainer.php" />
+      </dir>
+    </filelist>
+  </release>
+
+  <changelog>
+
+    <release>
+      <version>0.0.3</version>
+      <notes>
+          Internal development release.
+      </notes>
+    </release>
+
+    <release>
+      <version>0.0.2</version>
+      <notes>
+          Internal development release.
+      </notes>
+    </release>
+
+    <release>
+      <version>0.0.1</version>
+      <date>2002-10-30</date>
+      <state>beta</state>
+      <notes>
+          Internal development release.
+      </notes>
+    </release>
+  </changelog>
+
+</package>
