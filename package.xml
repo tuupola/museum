@@ -24,21 +24,18 @@ methods supported with recent PHP.
 
   <release>
     <license>BSD</license>
-    <version>1.2.0</version>
-    <date>2004-09-02</date>
+    <version>1.3.0RC1</version>
+    <date>2004-10-17</date>
     <state>stable</state>
     <notes>
-* load() and getObjects() now ignore extra columns in database which do 
-  not have a matching property name pairs
-* $table now defaults to classname
-* sibling is now overloaded by default if working overload extension available
-* constructor in sibling is now optional
-* BUGFIX: load() returned an array insted of true on successfull load
-* slightly improved regression tests
+* PHP5 support
     </notes>
     <filelist>
       <dir name="/" baseinstalldir="DB">
          <file role="php" name="DataContainer.php" />
+      </dir>
+      <dir name="/DataContainer/" baseinstalldir="DB">
+         <file role="php" name="Overload.php" />
       </dir>
       <dir name="tests" role="test">
          <file role="test" name="Person.php" />
@@ -64,6 +61,19 @@ methods supported with recent PHP.
   </deps>
 
   <changelog>
+
+    <release>
+      <version>1.2.0</version>
+      <notes>
+* load() and getObjects() now ignore extra columns in database which do 
+  not have a matching property name pairs
+* $table now defaults to classname
+* sibling is now overloaded by default if working overload extension available
+* constructor in sibling is now optional
+* BUGFIX: load() returned an array insted of true on successfull load
+* slightly improved regression tests
+      </notes>
+    </release>
 
     <release>
       <version>1.1.0</version>
