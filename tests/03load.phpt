@@ -36,6 +36,25 @@ if (PEAR::isError($status)) {
     print_r($status);
 }
 
+print "\n\n";
+
+unset($p);
+$p = new Person($dbh, 1);
+$status = $p->load();
+
+if (PEAR::isError($status)) {
+    print $status->getMessage();
+} else {
+    print $p->firstname . "\n";
+    print $p->lastname . "\n";
+    print $p->mobile . "\n";
+    if (isset($p->nosuch)) {
+      print $p->nosuch . "\n";
+    }
+
+    print_r($status);
+}
+
 ?>
 --GET--
 --POST--
@@ -44,3 +63,9 @@ Jenni
 Laine
 +358-9-123456
 1
+
+Mika
+Tuupola
++358-50-123456
+1
+
