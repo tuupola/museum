@@ -124,11 +124,9 @@ class DB_DataContainer {
             $query  = "SELECT * FROM $this->table
                        WHERE ($this->key='{$this->{$this->key}}') ";
 
-            // print "<FONT COLOR=#FF0000>$query</FONT><BR>";  
-
             $result = $this->dbh->query($query);
             if (DB::isError($result)) {
-               //  print $result->getDebugInfo(); 
+
             } else {
                 $row = $result->fetchRow(DB_FETCHMODE_ASSOC);
                 if (is_array($row)) {
@@ -156,29 +154,26 @@ class DB_DataContainer {
 
     function save($id='') {
              
-        // magic, if $id was given as a parameter, set my id to it and
-        // because $id is set we will do an UPDATE. TODO: This will still
-        // fail if $id does not exist.
+        /* magic, if $id was given as a parameter, set my id to it and  */
+        /* because $id is set we will do an UPDATE. TODO: This will     */
+        /* still fail if $id does not exist.                            */
              
         if ($id) {  
              $this->id = $id;
              
-        // if $id was not given try to use objects own id. If even that
-        // does not exist the object must have been created from submitted
-        // data and the $id will be empty -> we must do an INSERT.
+        /* if $id was not given try to use objects own id. If even that */
+        /* does not exist the object must have been created from        */
+        /* submitted data and the $id will be empty -> we must do       */
+        /* an INSERT.                                                   */
              
         } else {
              $id       = $this->id;
         }          
         
-        // Of object has an id this has to be an UPDATE
-        if ($id) { 
-    
+        if ($id) {     
             $prepend = "UPDATE $this->table SET ";
             $append  = " WHERE (id='$this->id') ";
-        
         } else {
-            
             $this->id  = $this->dbh->nextID($this->table);
             $prepend = "INSERT INTO $this->table SET
                         id='$this->id', ";
@@ -324,7 +319,7 @@ class DB_DataContainer {
 
         if (!(PEAR::isError($retval))) {
         
-            /* if we have an hardcoded query no need to generate one */
+            /* if we have an hardcoded query no need to generate one  */
             if (isset($params['query'])) {
 
                 $query = $params['query'];
@@ -352,6 +347,8 @@ class DB_DataContainer {
             } else { 
                 $retval = array();
 
+                /* no need to call load() after fetching objects  */
+                /* uses more memory but causes only one SELECT    */
                 while ($row = $result->fetchRow(DB_FETCHMODE_ASSOC)) {
                     $row['table'] = $params['table'];
                     $c = new $params['classname']($dbh, $row);
