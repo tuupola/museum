@@ -80,7 +80,12 @@ class DataContainer {
 
         /* if we have an id or key load up data from the database  */
         /* and discard any possible data given in $params.         */
-        if ($this->id || $this->key) {
+        /* id overrides anything                                   */
+        if ($this->id) {
+            $this->key = 'id';
+        }
+//        if ($this->id || $this->key) {
+        if ($this->key) {
             $query  = "SELECT * FROM $this->table
                        WHERE ($this->key='{$this->{$this->key}}') ";
 
@@ -219,7 +224,7 @@ class DataContainer {
     * as WHERE $params[where].
     *
     * @param	object  $dbh a PEAR database handler object.
-    * @param	array   $params (table, classname, where, order)
+    * @param	array   $params (table, classname, where, order, autoload)
     * @access	static
     * @return	mixed   array of objects on success PEAR_Error on failure
     */  
@@ -242,7 +247,14 @@ class DataContainer {
             if ($params[where]) {
                 $query .= "WHERE $params[where] ";
             }
-            $query .= "ORDER BY id ";
+            if ($params[orderby]) {
+                $query .= "ORDER BY $params[orderby] ";
+            } elseif ($params[order]) {
+                $query .= "ORDER BY $params[order] ";
+            }
+            if ($params[limit]) {
+                $query .= "LIMIT $params[limit] ";
+            }
 
             $result = $dbh->query($query);
 
@@ -255,6 +267,13 @@ class DataContainer {
                     $params2[id]    = $row->id;
                     $params2[table] = $params[table];
                     $c = new $params[classname]($dbh, $params2);
+                    if ($params[autoload]) {
+                        $status = $c->load();
+                        if (PEAR::isError($status)) {
+                            $retval = $status;
+                            break;
+                        }
+                    }
                     array_push($retval, $c);
                     unset($c);
                 }
