@@ -6,7 +6,7 @@ require_once('DB.php');
 require_once('PEAR.php');
 
 /**
-  * DataContainer class
+  * DB_DataContainer class
   *
   * @version	$Revision$
   * @author	Mika Tuupola <tuupola@appelsiini.net>
