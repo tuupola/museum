@@ -52,6 +52,7 @@ methods supported with recent PHP.
          <file role="test" name="08delete.phpt" />
          <file role="test" name="09hardcoded.phpt" />
          <file role="test" name="10errormessages.phpt" />
+         <file role="test" name="11constructor.phpt" />
       </dir>
     </filelist>
   </release>
