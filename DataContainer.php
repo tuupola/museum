@@ -271,8 +271,7 @@ class DB_DataContainer {
             /* dont use accessor methods */
             } else {
                 foreach ($params as $key => $value) {
-                    $method = 'set' . $key;
-                    $this->$method($value);
+                    $this->$key = $value;
                 }
             }
         }
