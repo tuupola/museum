@@ -15,7 +15,7 @@ print $status;
 ?>
 --FILE--
 <?php 
-require_once('mysql.php');
+require_once('mssql.php');
 require_once('Person.php');
 $params  = array();
 $p = new Person($dbh, $params);
