@@ -5,8 +5,10 @@
   <name>DB_DataContainer</name>
   <summary>SQL data encapsulation</summary>
   <description>
-     Encapsulates data stored in SQL database and provides common
-     methods for saving and retrieving data with automatic query
+Provides persistence layer for object data to be stored in PEAR DB
+supported databases. Included common methods for saving, retrieving and
+deleting data with automatic query generation. Multiobject retrieving
+supported with static function call.
      generation.
   </description>
 
@@ -20,12 +22,14 @@
   </maintainers>
 
   <release>
-    <license>PHP</license>
-    <version>0.0.4</version>
-    <date>2003-03-05</date>
+    <license>BSD</license>
+    <version>0.9.0</version>
+    <date>2003-04-02</date>
     <state>beta</state>
     <notes>
-        Internal development release.
+* First release candidate.
+* Uses DB::autoExecute() instead of internally building the queries.
+* Tested to work with Postgres and MySQL
     </notes>
     <filelist>
       <dir name="/" baseinstalldir="DB">
@@ -35,6 +39,13 @@
   </release>
 
   <changelog>
+
+    <release>
+      <version>0.0.4</version>
+      <notes>
+          Internal development release.
+      </notes>
+    </release>
 
     <release>
       <version>0.0.3</version>
