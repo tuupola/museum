@@ -8,7 +8,7 @@ if (@include(dirname(__FILE__)."/../DataContainer.php")) {
     $status = 'skip';
 }
 
-class Person extends DB_DataContainer {
+class person extends DB_DataContainer {
 
     var $firstname;
     var $lastname;
