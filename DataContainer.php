@@ -454,7 +454,13 @@ class DB_DataContainer extends DB_DataContainer_Overload {
             } else {
 
                 /* do not do a SELECT * but SELECT x,y,z ... instead */
-                $var    = get_class_vars($params['classname']);
+                $version = phpversion();
+                if (version_compare($version, '5.0.0', 'ge')) {
+                    $r   = new ReflectionClass($params['classname']);
+                    $var = $r->getdefaultProperties();
+                } else {
+                    $var = get_class_vars($params['classname']);
+                }
 
                 /* This wont work prior to PHP 4.2.0 */
                 $ignore = get_class_vars('DB_DataContainer');
