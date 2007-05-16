@@ -35,8 +35,9 @@
 - Inital conversion from DB_DataContainer
     </notes>
     <contents>
+      <dir name="/">
         <dir name="MDB2">
-            <dir name="/DataContainer" baseinstalldir="MDB2">
+            <dir name="DataContainer">
                 <file name="Overload.php" role="php" />
             </dir>
             <file name="DataContainer.php" role="php" />
@@ -57,6 +58,7 @@
             <file name="10errormessages.phpt" role="test" />
             <file name="11constructor.phpt" role="test" />
         </dir>
+      </dir>
     </contents>
     <dependencies>
         <required>
