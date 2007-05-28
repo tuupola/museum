@@ -337,78 +337,6 @@ class MDB2_DataContainer2 extends MDB2_DataContainer2_Overload {
     }
 
   /**
-    * Get the id
-    *
-    * @return    integer
-    */
-    function getId() {
-        return($this->id);
-    }
-
-  /**
-    * Get the database handle
-    *
-    * @return    object
-    */
-    function getDbh() {
-        return($this->dbh);
-    }
-
-  /**
-    * Get the table name
-    *
-    * @return    string
-    */
-    function getTable() {
-        return($this->table);
-    }
-
-  /**
-    * Get the strict flag
-    *
-    * @return    boolean
-    */
-    function getStrict() {
-        return($this->strict);
-    }
-
-  /**
-    * Set the database handle
-    */
-    function setDbh($value) {
-        $this->dbh = $value;
-    }
-
-  /**
-    * Set id of the object
-    */
-    function setId($value) {
-        $this->id = $value;
-    }
-
-  /**
-    * Set the key to be used when loading
-    */
-    function setKey($value) {
-        $this->key = $value;
-    }
-
-  /**
-    * Set the table to be used in the database
-    */
-    function setTable($value) {
-        $this->table = $value;
-    }
-
-  /**
-    * Set the strict flag
-    */
-    function setStrict($value) {
-        $this->strict = $value;
-    }
-
-
-  /**
     * Get array of DataContainer
     *
     * $params[classname] has the name of the class(es) function
@@ -530,37 +458,7 @@ class MDB2_DataContainer2 extends MDB2_DataContainer2_Overload {
         }
         return($retval);
     }
-
-  /**
-    * Method overloading
-    *
-    * NOTE! This will not work properly with PHP versions earlier
-    * than 4.3.2-RC2 because of bugs in overload extension.
-    *
-    */
-
-    function ___call($method, $params, &$return) {
-
-          $var     = get_object_vars($this);
-          $retval = false;
-
-          if (strpos($method, 'get') === 0) {
-              $property =  strtolower(substr($method, 3));
-              if (array_key_exists($property, $var)) {
-                  $return = $this->$property;
-                  $retval = true;
-              }
-          } elseif (strpos($method, 'set') === 0) {
-              $property =  strtolower(substr($method, 3));
-              if (array_key_exists($property, $var)) {
-                  $this->$property = $params[0];
-                  $return = null;
-                  $retval = true;
-              }
-          }
-        return($retval);
-    }
-
+    
 }
 
-?>
+
