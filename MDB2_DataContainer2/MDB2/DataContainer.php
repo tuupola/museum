@@ -42,7 +42,7 @@
 
 require_once('MDB2.php');
 require_once('PEAR.php');
-require_once('MDB2/DataContainer/Overload.php');
+require_once('MDB2/DataContainer2/Overload.php');
 
 /**
   * MDB2_DataContainer class
@@ -52,7 +52,7 @@ require_once('MDB2/DataContainer/Overload.php');
   * @author     Toni Viemerö <toni.viemero@iki.fi>
   */
 
-class MDB2_DataContainer extends MDB2_DataContainer_Overload {
+class MDB2_DataContainer2 extends MDB2_DataContainer2_Overload {
 
   /**
     * Id of the data if exists the database.
