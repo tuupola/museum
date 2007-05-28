@@ -3,10 +3,10 @@ MDB2_DataContainer::delete()
 --SKIPIF--
 <?php 
 /* first one for cvs */
-include('./skipif.php');
-if (@include(dirname(__FILE__)."/../DataContainer.php")) {
+include(dirname(__FILE__) . '/skipif.php');
+if (@include(dirname(__FILE__)."/../DataContainer2.php")) {
     $status = ''; 
-} else if (@include('MDB2/DataContainer.php')) {
+} else if (@include('MDB2/DataContainer2.php')) {
     $status = ''; 
 } else {
     $status = 'skip';
@@ -15,8 +15,8 @@ print $status;
 ?>
 --FILE--
 <?php 
-require_once('./skipif.php');
-require_once('./Person.php');
+require_once(dirname(__FILE__) . '/skipif.php');
+require_once(dirname(__FILE__) . '/Person.php');
 $params  = array();
 $p = new Person($dbh, $params);
 $p->createDB();

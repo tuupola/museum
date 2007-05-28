@@ -1,17 +1,17 @@
 <?php
 
-if (@include(dirname(__FILE__)."/../DataContainer.php")) {
+if (@include(dirname(__FILE__)."/../MDB2/DataContainer2.php")) {
     $status = '';
-} else if (@include('MDB2/DataContainer.php')) {
+} else if (@include('MDB2/DataContainer2.php')) {
     $status = '';
 } else {
     $status = 'skip';
 }
 
-class person extends MDB2_DataContainer {
+class person extends MDB2_DataContainer2 {
 
-    var $firstname;
-    var $lastname;
+    var $first_name;
+    var $last_name;
     var $mobile;
 
     /* NOTE: You can leave the constructor away from sibling */
@@ -29,8 +29,8 @@ class person extends MDB2_DataContainer {
         $this->dbh->query(
             "CREATE TABLE $this->table (
                  id INTEGER PRIMARY KEY NOT NULL,
-                 firstname VARCHAR(32),
-                 lastname VARCHAR(32),
+                 first_name VARCHAR(32),
+                 last_name VARCHAR(32),
                  mobile VARCHAR(16),
                  nosuch VARCHAR(16)
              )"
@@ -39,32 +39,32 @@ class person extends MDB2_DataContainer {
         $params['strict']    = false;     
 
         $params['id']        = '';     
-        $params['firstname'] = 'Mika';     
-        $params['lastname']  = 'Tuupola';     
+        $params['first_name'] = 'Mika';     
+        $params['last_name']  = 'Tuupola';     
         $params['mobile']    = '+358-50-123456';     
 
         $p = new Person($this->dbh, $params);
         $p->save();
 
         $params['id']        = '';     
-        $params['firstname'] = 'Janne';     
-        $params['lastname']  = 'Kjellman';     
+        $params['first_name'] = 'Janne';     
+        $params['last_name']  = 'Kjellman';     
         $params['mobile']    = '+358-40-123456';     
 
         $p->setProperties($params);
         $p->save();
 
         $params['id']        = '';     
-        $params['firstname'] = 'Juha-Matti';     
-        $params['lastname']  = 'Tuupola';     
+        $params['first_name'] = 'Juha-Matti';     
+        $params['last_name']  = 'Tuupola';     
         $params['mobile']    = '+358-41-123456';     
 
         $p->setProperties($params);
         $p->save();
 
         $params['id']        = '';     
-        $params['firstname'] = 'Jenni';     
-        $params['lastname']  = 'Laine';     
+        $params['first_name'] = 'Jenni';     
+        $params['last_name']  = 'Laine';     
         $params['mobile']    = '+358-9-123456';     
 
         $p->setProperties($params);
@@ -76,6 +76,4 @@ class person extends MDB2_DataContainer {
 
     }
 }
-
-?>
 

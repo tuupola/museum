@@ -1,6 +1,6 @@
 <?php
 
-include('./setup.php');
+include(dirname(__FILE__) . '/setup.php');
 require_once('MDB2.php');
 
 if (!defined('DRIVER_DSN') || DRIVER_DSN == '') {
