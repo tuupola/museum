@@ -121,7 +121,7 @@ class MDB2_DataContainer2 extends MDB2_DataContainer2_Overload {
     */
 
 
-    function MDB2_DataContainer($dbh, $params) {
+    function MDB2_DataContainer2($dbh, $params) {
 
         /* default is to use setXxx() methods */
         $strict = isset($params['strict']) ? $params['strict'] : true;
@@ -175,7 +175,7 @@ class MDB2_DataContainer2 extends MDB2_DataContainer2_Overload {
             $var    = get_object_vars($this);
 
             /* This wont work prior to PHP 4.2.0 */
-            $ignore = get_class_vars('MDB2_DataContainer');
+            $ignore = get_class_vars('MDB2_DataContainer2');
             foreach($ignore as $key => $val) {
                 unset($var[$key]);
             }
@@ -274,7 +274,7 @@ class MDB2_DataContainer2 extends MDB2_DataContainer2_Overload {
         $var    = get_object_vars($this);
 
         /* This wont work prior to PHP 4.2.0 */
-        $ignore = get_class_vars('MDB2_DataContainer');
+        $ignore = get_class_vars('MDB2_DataContainer2');
         foreach($ignore as $key => $val) {
             unset($var[$key]);
         }
@@ -468,7 +468,7 @@ class MDB2_DataContainer2 extends MDB2_DataContainer2_Overload {
                 }
 
                 /* This wont work prior to PHP 4.2.0 */
-                $ignore = get_class_vars('MDB2_DataContainer');
+                $ignore = get_class_vars('MDB2_DataContainer2');
                 foreach($ignore as $key => $val) {
                     unset($var[$key]);
                 }

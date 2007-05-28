@@ -35,22 +35,22 @@ class MDB2_DataContainer2_Inflector {
     }
     
     static function classify($table) {
-        $classified = Inflector::camelize(Inflector::singularize($table));
+        $classified = Inflector::camelize(MDB2_DataContainer2_Inflector::singularize($table));
         return $classified;
     }
     
     static function tableize($class) {
-        $tableized = Inflector::pluralize(Inflector::underscore($class));
+        $tableized = Inflector::pluralize(MDB2_DataContainer2_Inflector::underscore($class));
         return $tableized;
     }
     
     static function variable($string) {
-        $variable = Inflector::underscore($string);
+        $variable = MDB2_DataContainer2_Inflector::underscore($string);
         return $variable;
     }
 
     static function property($string) {
-        $property = Inflector::underscore($string);
+        $property = MDB2_DataContainer2_Inflector::underscore($string);
         return $property;
     }
 

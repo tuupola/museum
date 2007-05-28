@@ -1,6 +1,6 @@
 <?php
 
-require_once 'MDB2/DataContainer2/Inflector.php';
+require_once 'Inflector.php';
 
 class MDB2_DataContainer2_Overload {
 
