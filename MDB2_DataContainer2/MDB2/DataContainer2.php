@@ -146,7 +146,7 @@ class MDB2_DataContainer2 extends MDB2_DataContainer2_Overload {
         } else if (is_numeric($params)){
             $this->setId($params);
         }
-        $this->setDBH($dbh);
+        $this->setDbh($dbh);
     }
 
   /**
