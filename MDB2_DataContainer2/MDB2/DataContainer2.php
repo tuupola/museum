@@ -83,11 +83,6 @@ class MDB2_DataContainer2 extends MDB2_DataContainer2_Overload {
     */
     var $key;
 
-  /**
-    * Flag whether were running on strict mode or not.
-    * @access   private
-    */
-    var $strict;
 
   /**
     * The class constructor
@@ -363,7 +358,7 @@ class MDB2_DataContainer2 extends MDB2_DataContainer2_Overload {
     /*       until there is a way for static method to determine  */
     /*       which class it belongs to. Make this more elegant.   */
 
-    function getObjects($dbh, $params='') {
+    function find($dbh, $params='') {
 
         $retval = array();
 
@@ -454,6 +449,12 @@ class MDB2_DataContainer2 extends MDB2_DataContainer2_Overload {
             }
         }
         return($retval);
+    }
+    
+    static function test() {
+        print "I am test\n";
+        print self::$class_name;
+        print "\n";
     }
     
 }

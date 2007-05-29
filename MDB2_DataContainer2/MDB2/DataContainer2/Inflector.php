@@ -40,7 +40,7 @@ class MDB2_DataContainer2_Inflector {
     }
     
     static function tableize($class) {
-        $tableized = MDB2_DataContainer2_Inflector::pluralize(MDB2_DataContainer2_Inflector::underscore($class));
+        $tableized = MDB2_DataContainer2_Inflector::pluralize(MDB2_DataContainer2_Inflector::underscore(strtolower($class)));
         return $tableized;
     }
     
