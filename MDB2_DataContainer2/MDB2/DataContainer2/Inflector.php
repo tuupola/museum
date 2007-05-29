@@ -35,12 +35,12 @@ class MDB2_DataContainer2_Inflector {
     }
     
     static function classify($table) {
-        $classified = Inflector::camelize(MDB2_DataContainer2_Inflector::singularize($table));
+        $classified = MDB2_DataContainer2_Inflector::camelize(MDB2_DataContainer2_Inflector::singularize($table));
         return $classified;
     }
     
     static function tableize($class) {
-        $tableized = Inflector::pluralize(MDB2_DataContainer2_Inflector::underscore($class));
+        $tableized = MDB2_DataContainer2_Inflector::pluralize(MDB2_DataContainer2_Inflector::underscore($class));
         return $tableized;
     }
     

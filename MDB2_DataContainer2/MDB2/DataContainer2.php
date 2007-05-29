@@ -121,16 +121,13 @@ class MDB2_DataContainer2 extends MDB2_DataContainer2_Overload {
     */
 
 
-    function MDB2_DataContainer2($dbh, $params) {
-
-        /* default is to use setXxx() methods */
-        $strict = isset($params['strict']) ? $params['strict'] : true;
-        $this->setStrict($strict);
+    function __construct($dbh, $params) {
 
         $class = strtolower(get_class($this));
 
         /* tablename defaults to classname */
-        $table = isset($params['table']) ? $params['table'] : $class;
+        $table = isset($params['table']) ? $params['table'] :  
+                 MDB2_DataContainer2_Inflector::tableize($class);
         $this->setTable($table);
 
         /* overload by default if we have a decent php */
@@ -374,7 +371,7 @@ class MDB2_DataContainer2 extends MDB2_DataContainer2_Overload {
             $retval = PEAR::raiseError('Need $params[classname]');
         } elseif (!(isset($params['table']))) {
               /* defaults to $params[classname] */
-              $params['table'] = $params['classname'];
+              $params['table'] = MDB2_DataContainer2_Inflector::tableize($params['classname']);
         }
 
         if (!(PEAR::isError($retval))) {
