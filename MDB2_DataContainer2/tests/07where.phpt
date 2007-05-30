@@ -25,7 +25,7 @@ unset($params);
 
 $params['classname'] = 'person';
 $params['where']     = "last_name='Tuupola'";
-$person = Person::getObjects($dbh, $params);
+$person = Person::find($dbh, $params);
 
 foreach ($person as $p) {
     print "$p->id $p->first_name $p->last_name\n";

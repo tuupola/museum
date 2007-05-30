@@ -37,7 +37,7 @@ person Object
     [mobile] => +358-50-1234567
     [id] => 
     [dbh] => 
-    [table] => person
+    [table] => persons
     [key] => 
     [strict] => 
 )

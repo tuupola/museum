@@ -23,10 +23,9 @@ $p->createDB();
 unset($p);
 unset($params);
 
-$params['strict']    = false;
 $params['classname'] = 'person';
-$params['query']     = 'SELECT * FROM person ORDER BY id';
-$person = Person::getObjects($dbh, $params);
+$params['query']     = 'SELECT * FROM persons ORDER BY id';
+$person = Person::find($dbh, $params);
 
 foreach ($person as $p) {
     print "$p->id $p->last_name $p->first_name\n";

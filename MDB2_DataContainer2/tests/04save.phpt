@@ -18,7 +18,6 @@ print $status;
 require_once(dirname(__FILE__) . '/skipif.php');
 require_once(dirname(__FILE__) . '/Person.php');
   
-$params['strict']    = false;
 $params['first_name'] = 'Sami';
 $params['last_name']  = 'Johansson';
 $params['mobile']    = '+358-31-123456';
@@ -31,7 +30,6 @@ unset($p);
 unset($params);
 
 $params['id']      = $id;
-$params['strict']  = false;
   
 $p = new Person($dbh, $params);
 $p->load();
@@ -48,7 +46,6 @@ unset($p);
 unset($params);
 
 $params['id']      = $id;
-$params['strict']  = false;
   
 $p = new Person($dbh, $params);
 $p->load();

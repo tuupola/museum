@@ -25,7 +25,7 @@ unset($params);
 
 $params['classname'] = 'person';
 $params['limit']     = '3';
-$person = Person::getObjects($dbh, $params);
+$person = Person::find($dbh, $params);
 
 foreach ($person as $p) {
     print "$p->id $p->first_name $p->last_name\n";
@@ -33,7 +33,7 @@ foreach ($person as $p) {
 print "\n";
 
 $params['limit']     = '0, 3';
-$person = Person::getObjects($dbh, $params);
+$person = Person::find($dbh, $params);
 
 foreach ($person as $p) {
     print "$p->id $p->first_name $p->last_name\n";
@@ -41,7 +41,7 @@ foreach ($person as $p) {
 print "\n";
 
 $params['limit']     = '2, 2';
-$person = Person::getObjects($dbh, $params);
+$person = Person::find($dbh, $params);
 
 foreach ($person as $p) {
     print "$p->id $p->first_name $p->last_name\n";
@@ -49,7 +49,7 @@ foreach ($person as $p) {
 print "\n";
 
 $params['limit']     = '3 2';
-$person = Person::getObjects($dbh, $params);
+$person = Person::find($dbh, $params);
 
 foreach ($person as $p) {
     print "$p->id $p->first_name $p->last_name\n";

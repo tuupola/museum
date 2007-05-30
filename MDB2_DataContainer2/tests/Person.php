@@ -36,7 +36,7 @@ class person extends MDB2_DataContainer2 {
              )"
         );
 
-        $params['strict']    = false;     
+//        $params['strict']    = false;     
 
         $params['id']        = '';     
         $params['first_name'] = 'Mika';     
