@@ -4,7 +4,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
 
-    <name>MDB2_DataContainer</name>
+    <name>MDB2_DataContainer2</name>
     <channel>pear.php.net</channel>
     <summary>Data persistence and encapsulation</summary>
     <description>Provides persistence layer for object data to be stored in PEAR MDB2 supported databases. Included common methods for saving, retrieving and deleting data with automatic query generation. Multiobject retrieving supported with static function call. Runtime generation of accessor methods supported with recent PHP.</description>
@@ -20,27 +20,27 @@
         <email>toni.viemero@iki.fi</email>
         <active>yes</active>
     </helper>
-    <date>2007-01-21</date>
+    <date>2007-06-29</date>
     <time>15:20:02</time>
     <version>
-        <release>1.0.0</release>
+        <release>0.5.0</release>
         <api>1.0.0</api>
     </version>
     <stability>
-        <release>stable</release>
-        <api>stable</api>
+        <release>beta</release>
+        <api>beta</api>
     </stability>
     <license>BSD License</license>
     <notes>
-- Inital conversion from DB_DataContainer
+Second version.
     </notes>
     <contents>
       <dir name="/">
         <dir name="MDB2">
-            <dir name="DataContainer">
+            <dir name="DataContainer2">
                 <file name="Overload.php" role="php" />
             </dir>
-            <file name="DataContainer.php" role="php" />
+            <file name="DataContainer2.php" role="php" />
         </dir>
         <dir name="tests">
             <file name="Person.php" role="test" />
