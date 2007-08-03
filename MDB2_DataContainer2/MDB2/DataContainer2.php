@@ -311,19 +311,9 @@ class MDB2_DataContainer2 extends MDB2_DataContainer2_Overload {
         /* TODO: PEAR errorhandling if $params != array    */
         /* TODO: add possibility to pass data as an object */
         if (is_array($params)) {
-
-            /* use accessor methods */
-            if ($this->getStrict()) {
-                foreach ($params as $key => $value) {
-                    $method = 'set' . $key;
-                    $this->$method($value);
-                }
-
-            /* dont use accessor methods */
-            } else {
-                foreach ($params as $key => $value) {
-                    $this->$key = $value;
-                }
+            foreach ($params as $key => $value) {
+                $method = 'set' . $key;
+                $this->$method($value);
             }
         }
     }
