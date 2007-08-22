@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE package SYSTEM "../package.dtd">
+
+<package>
+  <name>I18N_IP2Country</name>
+  <summary>IP address to country code / name</summary>
+  <description>
+Provides methods for retrieveing country name or ISO 3166 country
+code based on ip address.
+  </description>
+
+  <maintainers>
+    <maintainer>
+      <user>tuupola</user>
+      <name>Mika Tuupola</name>
+      <email>tuupola@appelsiini.net</email>
+      <role>lead</role>
+    </maintainer>
+  </maintainers>
+
+  <release>
+    <license>BSD</license>
+    <version>0.3.0</version>
+    <date>2003-10-05</date>
+    <state>beta</state>
+    <notes>
+* It now possible to use the original flat csv text file without
+  importing it to sql database. NOTE! This is slow and should only
+  be used if SQLite or any SQL server is not available.
+* Uses the new ip-to-country database format
+    </notes>
+    <filelist>
+      <dir name="/" baseinstalldir="I18N/">
+         <file role="php" name="IP2Country.php" />
+         <file role="doc" name="mysql.sql" />
+      </dir>
+    </filelist>
+  </release>
+
+  <deps>
+    <dep type="pkg" rel="has" optional="yes">I18N_ISO_3166</dep>
+  </deps>
+
+  <changelog>
+   <release>
+    <version>0.2.0</version>
+     <notes>
+* First public release
+     </notes>
+   </release>
+   <release>
+    <version>0.1.0</version>
+     <notes>
+* Initial release
+     </notes>
+   </release>
+  </changelog>
+
+</package>
