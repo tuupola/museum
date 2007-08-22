@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE package SYSTEM "../package.dtd">
+
+<package>
+  <name>I18N_ISO_3166</name>
+  <summary>Handling of ISO 3166 country codes</summary>
+  <description>
+Provides methods for converting between ISO 3166 two letter, three
+letter, three number and country names.
+  </description>
+
+  <maintainers>
+    <maintainer>
+      <user>tuupola</user>
+      <name>Mika Tuupola</name>
+      <email>tuupola@appelsiini.net</email>
+      <role>lead</role>
+    </maintainer>
+  </maintainers>
+
+  <release>
+    <license>BSD</license>
+    <version>0.3.0</version>
+    <date>2006-03-18</date>
+    <state>beta</state>
+    <notes>
+- removed entry for 'YU' => 'Yugoslavia'
++ added entry for 'CS' => 'Serbia and Montenegro'
++ added entry for 'AX' => 'Åland Islands'
+* All countries now use shortened form of the official name
+    </notes>
+    <filelist>
+      <dir name="/" baseinstalldir="I18N/ISO/">
+         <file role="php" name="3166.php" />
+      </dir>
+    </filelist>
+  </release>
+
+  <changelog>
+  <release>
+    <version>0.2.2</version>
+    <date>2003-06-30</date>
+    <state>beta</state>
+    <notes>
+* East Timor has changed name to Timor-Leste (in november 2002)
+    </notes>
+  </release>
+
+   <release>
+    <version>0.2.1</version>
+     <notes>
+* allow lowercase countrycodes to be given as input
+     </notes>
+   </release>
+   <release>
+    <version>0.2.0</version>
+     <notes>
+* Initial release
+     </notes>
+   </release>
+  </changelog>
+
+</package>
