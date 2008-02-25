@@ -118,7 +118,7 @@ class MDB2_DataContainer2 extends MDB2_DataContainer2_Overload {
 
     function __construct($dbh, $params) {
 
-        $class = strtolower(get_class($this));
+        $class = get_class($this);
 
         /* tablename defaults to classname */
         $table = isset($params['table']) ? $params['table'] :  
