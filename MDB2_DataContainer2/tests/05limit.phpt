@@ -1,5 +1,5 @@
 --TEST--
-MDB2_DataContainer::getObjects() LIMIT clause
+MDB2_DataContainer::find() LIMIT clause
 --SKIPIF--
 <?php 
 include(dirname(__FILE__) . '/skipif.php');

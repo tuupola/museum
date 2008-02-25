@@ -18,7 +18,7 @@ print $status;
 require_once(dirname(__FILE__) . '/skipif.php');
 require_once(dirname(__FILE__) . '/Person.php');
 $dbh = '';
-$params['strict']    = false;
+$params = array();
 $p = new Person($dbh, $params);
 unset($params);
 $params['first_name'] = 'Mika';
@@ -39,5 +39,4 @@ person Object
     [dbh] => 
     [table] => persons
     [key] => 
-    [strict] => 
 )

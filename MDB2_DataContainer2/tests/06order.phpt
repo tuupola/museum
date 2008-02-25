@@ -1,5 +1,5 @@
 --TEST--
-MDB2_DataContainer::getObjects() ORDER clause
+MDB2_DataContainer::find() ORDER clause
 --SKIPIF--
 <?php 
 /* first one for cvs */

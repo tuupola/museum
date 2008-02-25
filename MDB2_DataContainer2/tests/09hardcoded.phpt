@@ -1,5 +1,5 @@
 --TEST--
-MDB2_DataContainer::getObjects() hardcoded query
+MDB2_DataContainer::find() hardcoded query
 --SKIPIF--
 <?php 
 /* first one for cvs */

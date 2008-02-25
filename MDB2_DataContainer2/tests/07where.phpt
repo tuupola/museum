@@ -1,5 +1,5 @@
 --TEST--
-MDB2_DataContainer::getObjects() WHERE clause
+MDB2_DataContainer::find() WHERE clause
 --SKIPIF--
 <?php 
 /* first one for cvs */
