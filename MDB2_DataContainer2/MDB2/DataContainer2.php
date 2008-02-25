@@ -38,7 +38,7 @@
 +-----------------------------------------------------------------------+
 */
 
-/* $Id: DataContainer.php,v 1.57 2005/12/05 13:02:23 tuupola Exp $ */
+/* $Id$ */
 
 require_once 'MDB2.php';
 require_once 'PEAR.php';
