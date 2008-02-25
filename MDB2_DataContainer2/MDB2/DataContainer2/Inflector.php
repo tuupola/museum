@@ -4,6 +4,8 @@
  * Simplest inflector in the world.
  */
 
+/* $Id$ $ */
+
 class MDB2_DataContainer2_Inflector {
 
     public function __construct() {

@@ -1,5 +1,7 @@
 <?php
 
+/* $Id$ $ */
+
 require_once 'MDB2/DataContainer2/Inflector.php';
 
 class MDB2_DataContainer2_Overload {
