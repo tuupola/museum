@@ -40,9 +40,10 @@
 
 /* $Id: DataContainer.php,v 1.57 2005/12/05 13:02:23 tuupola Exp $ */
 
-require_once('MDB2.php');
-require_once('PEAR.php');
-require_once('MDB2/DataContainer2/Overload.php');
+require_once 'MDB2.php';
+require_once 'PEAR.php';
+require_once 'MDB2/DataContainer2/Overload.php';
+require_once 'MDB2/DataContainer2/Inflector.php';
 
 /**
   * MDB2_DataContainer class
@@ -83,7 +84,6 @@ class MDB2_DataContainer2 extends MDB2_DataContainer2_Overload {
     */
     var $key;
 
-
   /**
     * The class constructor
     *
@@ -103,10 +103,6 @@ class MDB2_DataContainer2 extends MDB2_DataContainer2_Overload {
     * $params[table] contains the name of the table in the database.
     * This parameter is mandatory.
     *
-    * $params[strict] flag defines wheter to use accessor method
-    * for setting object properties (the default) or set them by
-    * directly accessing $this->property.
-    *
     * Rest of the data given in $params will be mapped against
     * object properties.
     *
@@ -115,22 +111,14 @@ class MDB2_DataContainer2 extends MDB2_DataContainer2_Overload {
     * @return   object
     */
 
-
     function __construct($dbh, $params) {
 
         $class = get_class($this);
 
-        /* tablename defaults to classname */
+        /* default tablename taken from classname */
         $table = isset($params['table']) ? $params['table'] :  
                  MDB2_DataContainer2_Inflector::tableize($class);
         $this->setTable($table);
-
-        /* overload by default if we have a decent php */
-        $version = phpversion();
-        if (version_compare($version, '4.3.2-RC2', 'ge') &&
-            version_compare($version, '5.0.0', 'lt')) {
-            overload($class);
-        }
 
         /* if only passing id no need to pass it in array */
         if (is_array($params)) {
@@ -448,5 +436,3 @@ class MDB2_DataContainer2 extends MDB2_DataContainer2_Overload {
     }
     
 }
-
-
