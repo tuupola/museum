@@ -39,6 +39,7 @@ Second version.
         <dir name="MDB2">
             <dir name="DataContainer2">
                 <file name="Overload.php" role="php" />
+                <file name="Inflector.php" role="php" />
             </dir>
             <file name="DataContainer2.php" role="php" />
         </dir>
@@ -63,7 +64,7 @@ Second version.
     <dependencies>
         <required>
             <php>
-                <min>4.3.2</min>
+                <min>5.0.0</min>
             </php>
             <pearinstaller>
                 <min>1.4.0b1</min>
