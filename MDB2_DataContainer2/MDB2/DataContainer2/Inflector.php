@@ -30,6 +30,7 @@ class MDB2_DataContainer2_Inflector {
         $underscored = strtolower(preg_replace('/(?<=\\w)([A-Z])/', '_\\1', $word));
         $underscored = strtolower(preg_replace('/([0-9])([a-z])/', '\\1_\\2', $underscored));        
         $underscored = strtolower(preg_replace('/([a-z])([0-9])/', '\\1_\\2', $underscored));        
+        $underscored = preg_replace('/__/', '_', $underscored);        
         return $underscored;
     }
     

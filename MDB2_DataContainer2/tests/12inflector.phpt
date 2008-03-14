@@ -19,20 +19,28 @@ if (! include(dirname(__FILE__)."/../MDB2/DataContainer2/Inflector.php")) {
   include('MDB2/DataContainer2/Inflector.php');
 };
 
-print MDB2_DataContainer2_Inflector::pluralize("foo");
-print MDB2_DataContainer2_Inflector::camelize("foo_bar");
-print MDB2_DataContainer2_Inflector::underscore("FooBar");
-print MDB2_DataContainer2_Inflector::humanize("foo_bar");
-print MDB2_DataContainer2_Inflector::classify("foo_bars");
-print MDB2_DataContainer2_Inflector::tableize("FooBar");
-print MDB2_DataContainer2_Inflector::tableize("Foo_Bar");
-print MDB2_DataContainer2_Inflector::variable("FooBar");
-print MDB2_DataContainer2_Inflector::property("FooBar");
+print MDB2_DataContainer2_Inflector::pluralize("foo") . "\n";
+print MDB2_DataContainer2_Inflector::camelize("foo_bar") . "\n";
+print MDB2_DataContainer2_Inflector::underscore("FooBar") . "\n";
+print MDB2_DataContainer2_Inflector::underscore("Foo_Bar") . "\n";
+print MDB2_DataContainer2_Inflector::humanize("foo_bar") . "\n";
+print MDB2_DataContainer2_Inflector::classify("foo_bars") . "\n";
+print MDB2_DataContainer2_Inflector::tableize("FooBar") . "\n";
+print MDB2_DataContainer2_Inflector::tableize("Foo_Bar") . "\n";
+print MDB2_DataContainer2_Inflector::variable("FooBar") . "\n";
+print MDB2_DataContainer2_Inflector::property("FooBar") . "\n";
 ?>
 --GET--
 --POST--
 --EXPECT--
-Janne Kjellman
-Mika Tuupola
-Juha-Matti Tuupola
+foos
+FooBar
+foo_bar
+foo_bar
+Foo Bar
+FooBar
+foo_bars
+foo_bars
+foo_bar
+foo_bar
 
