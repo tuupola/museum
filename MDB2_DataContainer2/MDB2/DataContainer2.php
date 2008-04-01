@@ -111,7 +111,7 @@ class MDB2_DataContainer2 extends MDB2_DataContainer2_Overload {
     * @return   object
     */
 
-    function __construct($dbh, $params) {
+    function __construct($dbh, $params = array()) {
 
         $class = get_class($this);
 
