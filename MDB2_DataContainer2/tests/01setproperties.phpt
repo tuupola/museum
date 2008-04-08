@@ -30,7 +30,7 @@ print_r($p);
 --GET--
 --POST--
 --EXPECT--
-person Object
+Person Object
 (
     [first_name] => Mika
     [last_name] => Tuupola

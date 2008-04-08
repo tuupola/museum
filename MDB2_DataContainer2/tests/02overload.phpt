@@ -28,6 +28,9 @@ print $p->getFirstName() . "\n";
 print $p->getLastName() . "\n";
 print $p->getMobile() . "\n";
 print $p->getTable() . "\n";
+
+$p->findByFirstName();
+$p->findAllByFirstName();
 ?>
 --GET--
 --POST--

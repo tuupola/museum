@@ -23,7 +23,6 @@ $p->createDB();
 unset($p);
 unset($params);
 
-$params['classname'] = 'person';
 $params['query']     = 'SELECT * FROM persons ORDER BY id';
 $person = Person::find($dbh, $params);
 

@@ -11,5 +11,3 @@ $dbh =& MDB2::factory(DRIVER_DSN);
 if (MDB2::isError($dbh)) {
     die("skip\n");
 }
-
-?>

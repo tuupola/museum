@@ -8,7 +8,7 @@ if (@include(dirname(__FILE__)."/../MDB2/DataContainer2.php")) {
     $status = 'skip';
 }
 
-class person extends MDB2_DataContainer2 {
+class Person extends MDB2_DataContainer2 {
 
     var $first_name;
     var $last_name;
@@ -19,8 +19,12 @@ class person extends MDB2_DataContainer2 {
 /*   
     function Person($dbh, $params) {
         $this->DB_DataContainer($dbh, $params);    
-    }
+    }x
 */
+
+    public static function find($dbh, $params='', $caller=__CLASS__) {
+        return parent::find($dbh, $params, $caller);
+    }
 
     function createDB() {
         $this->dbh->loadModule('Manager');

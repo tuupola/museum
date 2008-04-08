@@ -23,7 +23,6 @@ $p->createDB();
 unset($p);
 unset($params);
 
-$params['classname'] = 'person';
 $params['limit']     = '3';
 $person = Person::find($dbh, $params);
 

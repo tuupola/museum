@@ -336,15 +336,21 @@ class MDB2_DataContainer2 extends MDB2_DataContainer2_Overload {
     /*       until there is a way for static method to determine  */
     /*       which class it belongs to. Make this more elegant.   */
 
-    function find($dbh, $params='') {
+    public static function find($dbh, $params='', $caller=__CLASS__) {
+        /* TODO: hack while we are waiting for PHP 5.3, expect extending  */
+        /* class to have static function like the following:              */
+        /* static function find($dbh, $params='', $caller=__CLASS__) {    */
+        /*    parent::find($dbh, $params, $caller);                       */
+        /* }                                                              */
+        $class  = isset($params['classname']) ? $params['classname'] : $caller;
 
         $retval = array();
 
-        if (!(trim($params['classname']))) {
+        if (!(trim($class))) {
             $retval = PEAR::raiseError('Need $params[classname]');
         } elseif (!(isset($params['table']))) {
-              /* defaults to $params[classname] */
-              $params['table'] = MDB2_DataContainer2_Inflector::tableize($params['classname']);
+            /* defaults to $class in plural */
+            $params['table'] = MDB2_DataContainer2_Inflector::tableize($class);
         }
 
         if (!(PEAR::isError($retval))) {
@@ -356,21 +362,16 @@ class MDB2_DataContainer2 extends MDB2_DataContainer2_Overload {
 
             } else {
 
-                /* do not do a SELECT * but SELECT x,y,z ... instead */
-                $version = phpversion();
-                if (version_compare($version, '5.0.0', 'ge')) {
-                    $r   = new ReflectionClass($params['classname']);
-                    $var = $r->getdefaultProperties();
-                } else {
-                    $var = get_class_vars($params['classname']);
-                }
+                $r      = new ReflectionClass($class);
+                $var    = $r->getdefaultProperties();
 
-                /* This wont work prior to PHP 4.2.0 */
-                $ignore = get_class_vars('MDB2_DataContainer2');
+                $r      = new ReflectionClass('MDB2_DataContainer2');
+                $ignore = $r->getdefaultProperties();
+
                 foreach($ignore as $key => $val) {
                     unset($var[$key]);
                 }
-
+                
                 $select  = implode(',', array_keys($var));
                 $select .= ',id';
 
@@ -407,7 +408,6 @@ class MDB2_DataContainer2 extends MDB2_DataContainer2_Overload {
                     $result = $dbh->query($query);
                 }
             }
-
             if (MDB2::isError($result)) {
                 $retval = $result;
             } else {
@@ -417,10 +417,7 @@ class MDB2_DataContainer2 extends MDB2_DataContainer2_Overload {
                 /* uses more memory but causes only one SELECT    */
                 while ($row = $result->fetchRow(MDB2_FETCHMODE_ASSOC)) {
                     $row['table']  = $params['table'];
-                    if (isset($params['strict'])) {
-                        $row['strict'] = $params['strict'];
-                    }
-                    $c = new $params['classname']($dbh, $row);
+                    $c = new $class($dbh, $row);
                     array_push($retval, $c);
                     unset($c);
                 }
@@ -428,11 +425,5 @@ class MDB2_DataContainer2 extends MDB2_DataContainer2_Overload {
         }
         return($retval);
     }
-    
-    static function test() {
-        print "I am test\n";
-        print self::$class_name;
-        print "\n";
-    }
-    
+
 }

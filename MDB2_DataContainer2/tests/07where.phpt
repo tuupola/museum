@@ -23,7 +23,6 @@ $p->createDB();
 unset($p);
 unset($params);
 
-$params['classname'] = 'person';
 $params['where']     = "last_name='Tuupola'";
 $person = Person::find($dbh, $params);
 

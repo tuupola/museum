@@ -6,4 +6,3 @@
 //define('DRIVER_DSN', 'mssql://sa:foo@MSSQLSERVER/pubs');
 define('DRIVER_DSN', 'sqlite://dummy:@localhost/' . getcwd() . DIRECTORY_SEPARATOR . 'test.db' );
 
-?>
